@@ -23,6 +23,18 @@ namespace CooperatorsDirect_TST.Controllers
 
             // Assert
             Assert.IsNotNull(result);
+
+            // Assert
+            Assert.IsNotNull(result);
+
+            // Assert
+            Assert.IsNotNull(result);
+
+            // Assert
+            Assert.IsNotNull(result);
+
+            // Assert
+            Assert.IsNotNull(result);
         }
     }
 }
