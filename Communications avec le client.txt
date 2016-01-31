@@ -1,0 +1,15 @@
+2016/01/30 22h05 - Pascale
+Bonjour, 
+
+Je commence la page d'inscription pour l'application web que je souhaite soumettre pour répondre à la problématique. 
+
+Nous comptons demander le nom et prénom, le numéro de police, une adresse de courriel, un nom d'utilisateur, un mot de passe et une adresse/date de naissance pour confirmer que le bon client va avec le bon numéro de police. 
+
+Première question: Je veux mettre une info-bulle pour informer le client où il peut trouver son numéro de police (dans le cas où le client ne serait pas certain d'où la trouver.) Puis-je savoir où celui-ci peut le trouver? 
+
+Deuxième question: Y-a-t'il d'autres informations pertinentes qui sont demandées à l'inscription ou on peut obtenir toutes les informations nécessaires sont dans la police d'assurance et n'ont pas besoin d'être répétés? 
+
+Troisième question: Est-ce que, présentement, vous possédez un (ou plusieurs) systèmes utilisables par le public (Par exemple, un service web) où notre application pourrait envoyer des requêtes pour obtenir ou envoyer des informations? Le principe est de ne pas répéter certaines parties du code que plusieurs compagnies offrent par le biais d'un service web. De plus, toutes les interactions entre notre application et votre système présent réduiront la difficulté si vous voulez incorporer notre travail à vos systèmes éventuellement.
+
+Merci,
+Bonne journée
