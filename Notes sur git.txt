@@ -1,0 +1,25 @@
+Notes importantes:
+	Ne jamais utiliser l'interface graphique. Elle fait de la marde.
+	La seule raison de l'utiliser est pour lancer Git Shell directement dans le bon répertoire
+
+
+Commandes:
+	[Début de la session de travail]
+	[S'assurer que votre git Shell est dans le bon repertoire et sur la bonne branche
+	[la ligne de commande avant d'ecrire quoi que ce soit devrait ressembler à ça: C:\Users\Pascale\Université\Hiver_2016\projetsGit\CooperatorsDirect [pascale]>]
+	[En remplacant évidemment le chemin par le vôtre et le [pascale] par votre nom]
+
+	git pull origin master
+		Obtenir la dernière version des fichiers de la version lointaine du projet
+	git status
+		Verifier quels fichiers on a supprimé, ajouté ou modifié depuis la dernière modification enregistrée (commit)
+	git add * | git add .
+		Ajouter les modifications (visibles avec git status) au prochain enregistrement (commit)
+	git commit -m "monCommentaire"
+		Enregistrer les modifications qui ont été ajoutées avec git add (celles en vert avec git status) avec un commentaire expliquant ce que vous avez fait
+	git push origin [maBranche]
+		ex: git push origin pascale
+		Envoyer votre dernier enregistrement (commit) vers le serveur lointain, sur votre branche personnelle (pas accessible pour les autres)
+	Sur le site --> Code --> Branches --> maBranche --> New Pull Request --> (SI able to merge) --> Create pull request --> Confirmer
+		fusionner votre branche lointaine avec la branche "master" (accessible par tous). seulement faire ça si ça compile et vous avez rien brisé.
+	[Fin de la session de travail]
