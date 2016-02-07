@@ -1,7 +1,7 @@
 ﻿@model CooperatorsDirect.Models.Client
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutVisitor.cshtml";
     ViewBag.Title = "Connexion";
 }
 
@@ -32,6 +32,10 @@
 
             <div>
                 <input class="btn btn-primary btn-block" type="submit" value="Connexion" />
+            </div>
+            
+            <div>
+                @Html.ActionLink("S'inscrire", "Create", "User")
             </div>
 
             @ViewBag.Error
