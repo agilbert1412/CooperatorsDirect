@@ -13,3 +13,12 @@ Troisième question: Est-ce que, présentement, vous possédez un (ou plusieurs) sy
 
 Merci,
 Bonne journée
+
+Réponse du client: 
+
+
+(1)    Le client peut trouver son numéro de police soit sur sa police d’assurance qu’il a reçu par la poste, ou bien encore sur son petit papier rose d’assurance qu’il doit conserver dans sa voiture en guise de preuve d’assurance.
+
+(2)    On peut assumer que nous disposons d’une base de données contenant toutes les infos pertinentes de l’assuré en fonction de son numéro de police et de la date à laquelle le client se log.
+
+(3)    Oui, nous avons un système appelé Claim Center pour enregistrer toutes les transactions sur les sinistres. Par contre, je recommanderais de programmer votre application sans tenir compte de ceci, c’est-à-dire, en supposant que votre système remplacera ce qui existe déjà.
