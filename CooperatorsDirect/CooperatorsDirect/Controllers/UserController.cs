@@ -45,6 +45,23 @@ namespace LevelUp.Controllers
             return View();
         }
 
+        [HttpPost, ActionName("Create")]
+        public ActionResult Create(Client user)
+        {
+
+            UserModel userMod = new UserModel();
+            if (userMod.Find(user.Email) != null)
+            {
+                ViewBag.UsernameError = "L'adresse courriel est déjà utilisée doit être unique";
+            }
+
+            if (!userMod.Insert(user))
+            {
+                return View("Create");
+            }
+            return View("Index");
+        }
+
 
         /// <summary>
         /// On recrée la vue Index peut importe le resultat. Par contre dans le cas d'un échec de connexion 
