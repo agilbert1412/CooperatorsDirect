@@ -35,3 +35,76 @@ L'application en cas d'accident couvre-t-elle seulement les accidents entre deux
 
 Merci
 Bonne journée
+
+Réponse du client: 
+Salut Pascale !
+
+ 
+
+Voici des captures d’écran d’un rapport que les ajusteurs peuvent remplir manuellement quand le système de réclamation n’est pas accessible. Ça contient toute sorte d’informations qui devraient pouvoir t’inspirer. Entre autres, celles-ci me semblent importantes :
+///Les captures écrans ne s'affichant pas, elles sont enregistrer image par image
+ 
+
+-Purpose of trip (but du trajet lors duquel la collision est arrivée)
+
+-Speed (Vitesse)
+
+-Information sur les passagers
+
+-Influence de drogue, alcool ou médicaments
+
+-Officiels impliqués (agent de police)
+
+-Témoins
+
+-Information si remorquage du véhicule
+
+-Est-ce qu’une ambulance a dû intervenir
+
+-Est-ce que les pompiers ont dû intervenir
+
+ 
+
+Est-ce que ça te donne des idées ? Je ne te suggère pas d’inclure toutes ces informations, mais plutôt de puiser dans cette liste pour bâtir ton interface.
+
+ 
+
+Bonne journée !
+
+ 
+
+Marion Grégoire-Duclos, ACAS | Analyste en Actuariat, Tarification commerciale et agricole
+P&C Pricing and Segmentation | Co-operators
+
+360, rue Saint-Jacques, suite 1100, Montréal, QC, H2Y 2N1
+Tél. : 514-789-2667 | Numéro sans frais : 1-866-731-2667, poste 308028
+
+ 
+
+ 
+
+De : Marion Gregoire-Duclos 
+Envoyé : February-11-16 9:08 AM
+À : 'pascale_bouchard@live.ca' <pascale_bouchard@live.ca>
+Objet : RE: Poser une question - Co-operators 2016 [#4]
+
+ 
+
+Bonjour Pascale,
+
+ 
+
+L’utilisation de la CID me semble être une très bonne idée pour déterminer les infos à envoyer en cas de collision.
+
+ 
+
+Pour tes questions par rapport aux informations requises en cas d’accident, je te suggère de te concentrer sur le descriptif de l’accident pour l’instant. Nous allons tenter d’obtenir une liste plus exhaustive de la part du département des réclamations et te la transférer.
+
+ 
+
+Finalement, on demande que l’application gère les réclamations de type « collision », donc pas le vol ni le vandalisme.
+
+ 
+
+Merci pour tes questions !
+
