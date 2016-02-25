@@ -9,12 +9,12 @@ namespace CooperatorsDirect.Models
 {
     public class CustomPrincipal
     {
-        private Client User;
+        private User User;
 
         public IIdentity Identity { get; set; }
 
 
-        public CustomPrincipal(Client user)
+        public CustomPrincipal(User user)
         {
             User = user;
             Identity = new GenericIdentity(User.Email);

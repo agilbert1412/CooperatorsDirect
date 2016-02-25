@@ -9,7 +9,7 @@ namespace CooperatorsDirect.Security
     public static class SessionPersiter
     {
         static string usernameSessionVar = "user";
-        public static Client User
+        public static User User
         {
             get
             {
@@ -17,7 +17,7 @@ namespace CooperatorsDirect.Security
                 var sessionVar = HttpContext.Current.Session[usernameSessionVar];
                 if (sessionVar != null)
                 {
-                    return sessionVar as Client;
+                    return sessionVar as User;
                 }
                 return null;
             }

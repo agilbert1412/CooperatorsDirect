@@ -46,7 +46,7 @@ namespace LevelUp.Controllers
         }
 
         [HttpPost, ActionName("Create")]
-        public ActionResult Create(Client user)
+        public ActionResult Create(User user)
         {
 
             UserModel userMod = new UserModel();
@@ -73,7 +73,7 @@ namespace LevelUp.Controllers
         public ActionResult connexion(string email, string password)
         {
             UserModel userMod = new UserModel();
-            Client userConnected = userMod.Get(email, password);
+            User userConnected = userMod.Get(email, password);
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)
                 || userConnected == null)
             {

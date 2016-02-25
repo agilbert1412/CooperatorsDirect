@@ -12,7 +12,7 @@ namespace CooperatorsDirect.Models
     public class UserModel : IUserRepository
     {
 
-        List<Client> listUser;
+        List<User> listUser;
         CooperatorsContext CooperatorsContext;
 
         public UserModel()
@@ -21,7 +21,7 @@ namespace CooperatorsDirect.Models
             listUser = CooperatorsContext.Clients.ToList();
         }
 
-        public Client Find(string email)
+        public User Find(string email)
         {
             if (email == string.Empty || email == null)
             {
@@ -36,12 +36,12 @@ namespace CooperatorsDirect.Models
                 return null;
             }
         }
-        public List<Client> GetAll()
+        public List<User> GetAll()
         {
             return listUser;
         }
 
-        public Client Get(string email, string password)
+        public User Get(string email, string password)
         {
             if ((email == string.Empty || email == null) || (password == string.Empty || password == null))
             {
@@ -49,7 +49,7 @@ namespace CooperatorsDirect.Models
             }
             try
             {
-                Client userConnected = listUser.Where(u => (u.Email.ToLower().Equals(email.ToLower()) || u.NoPolice.ToLower().Equals(email.ToLower())) && PasswordHashing.VerifyHashedPassword(u.Password, password)).First();
+                User userConnected = listUser.Where(u => (u.Email.ToLower().Equals(email.ToLower()) || u.NoPolice.ToLower().Equals(email.ToLower())) && PasswordHashing.VerifyHashedPassword(u.Password, password)).First();
                 if (userConnected != null)
                 {
                     SessionPersiter.User = userConnected;
@@ -81,7 +81,7 @@ namespace CooperatorsDirect.Models
                 return false;
             }
         }
-        public bool Insert(Client user)
+        public bool Insert(User user)
         {
             try
             {
@@ -99,7 +99,7 @@ namespace CooperatorsDirect.Models
                 return false;
             }
         }
-        public bool Edit(Client user)
+        public bool Edit(User user)
         {
             try
             {

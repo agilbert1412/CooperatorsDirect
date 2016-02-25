@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CooperatorsDirect;
+using CooperatorsDirect.Models;
 using CooperatorsDirect.Security;
 
 namespace CooperatorsDirect_TST
@@ -8,9 +9,10 @@ namespace CooperatorsDirect_TST
     [TestClass]
     public class CooperatorsDirectTests
     {
-        #region "Hashing"
+        #region Hashing
 
         [TestMethod]
+        [TestProperty("Category", "Hashing")]
         public void HashingTest()
         {
             string pass = "abcdef";
@@ -20,6 +22,7 @@ namespace CooperatorsDirect_TST
         }
 
         [TestMethod]
+        [TestProperty("Category", "Hashing")]
         public void BigHashingTest()
         {
             string pass = "abcdefghijklmnopqrstuvwxyz1234567890";
@@ -29,6 +32,7 @@ namespace CooperatorsDirect_TST
         }
 
         [TestMethod]
+        [TestProperty("Category", "Hashing")]
         public void HugeHashingTest()
         {
             string pass = "";
@@ -42,6 +46,7 @@ namespace CooperatorsDirect_TST
         }
 
         [TestMethod]
+        [TestProperty("Category", "Hashing")]
         public void HashCompareTest()
         {
             string pass = "abcdef";
@@ -50,6 +55,7 @@ namespace CooperatorsDirect_TST
         }
 
         [TestMethod]
+        [TestProperty("Category", "Hashing")]
         public void BigHashCompareTest()
         {
             string pass = "abcdefghijklmnopqrstuvwxyz1234567890";
@@ -58,6 +64,7 @@ namespace CooperatorsDirect_TST
         }
 
         [TestMethod]
+        [TestProperty("Category", "Hashing")]
         public void HugeHashCompareTest()
         {
             string pass = "";
@@ -70,6 +77,7 @@ namespace CooperatorsDirect_TST
         }
 
         [TestMethod]
+        [TestProperty("Category", "Hashing")]
         public void BadHashCompareTest()
         {
             string pass = "abcdef";
@@ -78,6 +86,7 @@ namespace CooperatorsDirect_TST
         }
 
         [TestMethod]
+        [TestProperty("Category", "Hashing")]
         public void BigBadHashCompareTest()
         {
             string pass = "abcdefghijklmnopqrstuvwxyz1234567890";
@@ -86,6 +95,7 @@ namespace CooperatorsDirect_TST
         }
 
         [TestMethod]
+        [TestProperty("Category", "Hashing")]
         public void HugeBadHashCompareTest()
         {
             string pass = "";
@@ -95,6 +105,89 @@ namespace CooperatorsDirect_TST
             }
             string hashed = PasswordHashing.HashPassword(pass);
             Assert.IsFalse(PasswordHashing.VerifyHashedPassword(hashed, pass + "a"));
+        }
+
+        #endregion
+
+        #region Classe User
+
+        [TestMethod]
+        [TestProperty("Category", "User")]
+        public void CreateUser()
+        {
+            User u = null;
+            Assert.IsNull(u);
+            u = new User();
+            Assert.IsNotNull(u);
+            Assert.IsNotNull(u.UserID);
+            Assert.IsNull(u.Adresse);
+            Assert.IsNull(u.Email);
+            Assert.IsNull(u.Nom);
+            Assert.IsNull(u.NoPolice);
+            Assert.IsNull(u.Password);
+            Assert.IsNull(u.Prenom);
+            Assert.IsTrue(u.Role == Roles.client);
+            Assert.IsNotNull(u.DateNaissance);
+        }
+
+        [TestMethod]
+        [TestProperty("Category", "User")]
+        public void CreateUserWithParameters()
+        {
+            User u = null;
+            Assert.IsNull(u);
+            DateTime d = DateTime.Now;
+            u = new User("Wayne", "Bruce", "batsy@waynecorp.com", "12345", PasswordHashing.HashPassword("12345"), d, "Wayne Manor");
+            Assert.IsNotNull(u);
+            Assert.IsNotNull(u.UserID);
+            Assert.IsTrue(u.Adresse == "Wayne Manor");
+            Assert.IsTrue(u.Email == "batsy@waynecorp.com");
+            Assert.IsTrue(u.Nom == "Wayne");
+            Assert.IsTrue(u.NoPolice == "12345");
+            Assert.IsTrue(PasswordHashing.VerifyHashedPassword(u.Password, "12345"));
+            Assert.IsTrue(u.Prenom == "Bruce");
+            Assert.IsTrue(u.Role == Roles.client);
+            Assert.IsTrue(u.DateNaissance == DateTime.Parse(d.ToShortDateString()));
+        }
+
+        [TestMethod]
+        [TestProperty("Category", "User")]
+        public void CreateUserWithParametersRole()
+        {
+            User u = null;
+            Assert.IsNull(u);
+            DateTime d = DateTime.Now;
+            u = new User("Kent", "Clark", "supes@kryptonland.com", "12345", PasswordHashing.HashPassword("12345"), d, "Ice Fortress", Roles.admin);
+            Assert.IsNotNull(u);
+            Assert.IsNotNull(u.UserID);
+            Assert.IsTrue(u.Adresse == "Ice Fortress");
+            Assert.IsTrue(u.Email == "supes@kryptonland.com");
+            Assert.IsTrue(u.Nom == "Kent");
+            Assert.IsTrue(u.NoPolice == "12345");
+            Assert.IsTrue(PasswordHashing.VerifyHashedPassword(u.Password, "12345"));
+            Assert.IsTrue(u.Prenom == "Clark");
+            Assert.IsTrue(u.Role == Roles.admin);
+            Assert.IsTrue(u.DateNaissance == DateTime.Parse(d.ToShortDateString()));
+        }
+
+        [TestMethod]
+        [TestProperty("Category", "User")]
+        public void CreateUserWithParametersTextDate()
+        {
+            User u = null;
+            Assert.IsNull(u);
+            DateTime d = DateTime.Now;
+            u = new User("Allen", "Barry", "flashstep@light.spd", "12345", PasswordHashing.HashPassword("12345"), d.ToShortDateString(), "Her.. wait no over there", Roles.reparateur);
+            Assert.IsNotNull(u);
+            Assert.IsNotNull(u.UserID);
+            Assert.IsTrue(u.Adresse == "Her.. wait no over there");
+            Assert.IsTrue(u.Email == "flashstep@light.spd");
+            Assert.IsTrue(u.Nom == "Allen");
+            Assert.IsTrue(u.NoPolice == "12345");
+            Assert.IsTrue(PasswordHashing.VerifyHashedPassword(u.Password, "12345"));
+            Assert.IsTrue(u.Prenom == "Barry");
+            Assert.IsTrue(u.Role == Roles.reparateur);
+            Assert.IsTrue(u.DateNaissance == DateTime.Parse(d.ToShortDateString()));
         }
 
         #endregion
