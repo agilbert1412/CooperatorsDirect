@@ -8,17 +8,17 @@ namespace CooperatorsDirect.Models
     public interface IUserRepository
     {
 
-        Client Find(string email);
+        User Find(string email);
 
-        List<Client> GetAll();
+        List<User> GetAll();
 
-        Client Get(string email, string password);
+        User Get(string email, string password);
 
         bool Delete(string email);
 
-        bool Insert(Client user);
+        bool Insert(User user);
 
-        bool Edit(Client user);
+        bool Edit(User user);
 
     }
 }

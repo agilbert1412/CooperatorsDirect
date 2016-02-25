@@ -15,14 +15,14 @@ namespace CooperatorsDirect.DAL
         {
         }
         
-        public DbSet<Client> Clients { get; set; }
+        public DbSet<User> Clients { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
 
-        public void Add(Client user)
+        public void Add(User user)
         {
             Clients.Add(user);
         }
