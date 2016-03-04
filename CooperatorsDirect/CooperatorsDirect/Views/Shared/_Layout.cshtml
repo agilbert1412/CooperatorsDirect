@@ -1,5 +1,8 @@
 ﻿<!DOCTYPE html>
 @using CooperatorsDirect.Security
+@*@{
+        SessionPersiter sp = new SessionPersiter();
+    }*@
 <html>
 <head>
     <meta charset="utf-8" />
@@ -32,14 +35,24 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
-
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Register", "Create", "User")</li>
-                    <li>@Html.ActionLink("Log in", "Index", "User")</li>
-                </ul>
+                @if (SessionPersiter.User != null)
+                {
+                    string message = "Bonjour " + SessionPersiter.User.Prenom + "!";
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink(message, "Details", "User")</li>
+                        <li>@Html.ActionLink("Se déconnecter", "Logout", "User")</li>
+                    </ul>
+                }
+                @if (SessionPersiter.User == null)
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Register", "Detail", "User")</li>
+                        <li>@Html.ActionLink("Log in", "Index", "User")</li>
+                    </ul>
+                }
             </div>
         </div>
     </div>
