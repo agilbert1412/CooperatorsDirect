@@ -37,6 +37,17 @@ namespace LevelUp.Controllers
         }
 
         /// <summary>
+        /// Page d'un client
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Details(int id = -1)
+        {
+            if (id == -1)
+                id = SessionPersiter.User.UserID;
+            return View(repository.GetAll().Where(u => u.UserID == id).First());
+        }
+
+        /// <summary>
         /// Page de création du contrôler. Ici c'est la page d'inscription d'un client
         /// </summary>
         /// <returns></returns>
