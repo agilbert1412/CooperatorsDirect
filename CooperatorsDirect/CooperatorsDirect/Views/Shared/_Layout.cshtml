@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 @using CooperatorsDirect.Security
+@using CooperatorsDirect
 @*@{
         SessionPersiter sp = new SessionPersiter();
     }*@
@@ -40,6 +41,10 @@
                         {
                             <li>@Html.ActionLink("Utilisateurs", "List", "User")</li>
                         }
+                        @if (SessionPersiter.User.Role == CooperatorsDirect.Models.Roles.employe)
+                        {
+                            <li>@Html.ActionLink("Clients", "List", "User")</li>
+                        }
                     </ul>
                     string message = "Bonjour " + SessionPersiter.User.Prenom + "!";
                     <ul class="nav navbar-nav navbar-right">
@@ -50,8 +55,8 @@
                 @if (SessionPersiter.User == null)
                 {
                     <ul class="nav navbar-nav navbar-right">
-                        <li>@Html.ActionLink("Register", "Detail", "User")</li>
-                        <li>@Html.ActionLink("Log in", "Index", "User")</li>
+                        <li>@Html.ActionLink("Inscription", "Register", "User")</li>
+                        <li>@Html.ActionLink("Connexion", "Index", "User")</li>
                     </ul>
                 }
             </div>

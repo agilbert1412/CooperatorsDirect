@@ -10,7 +10,9 @@ namespace CooperatorsDirect.Models
 
         User Find(string email);
 
-        List<User> GetAll();
+        List<User> GetAllUsers();
+
+        List<User> GetAllCustomers();
 
         User GetUser(int id);
 

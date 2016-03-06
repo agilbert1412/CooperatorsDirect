@@ -37,9 +37,14 @@ namespace CooperatorsDirect.Models
             }
         }
 
-        public List<User> GetAll()
+        public List<User> GetAllUsers()
         {
             return listUser;
+        }
+
+        public List<User> GetAllCustomers()
+        {
+            return listUser.Where(u => u.Role == Roles.client).ToList();
         }
 
         public User GetUser(int id)
@@ -55,7 +60,7 @@ namespace CooperatorsDirect.Models
             }
             try
             {
-                User userConnected = listUser.Where(u => (u.Email.ToLower().Equals(email.ToLower()) || u.NoPolice.ToLower().Equals(email.ToLower())) && PasswordHashing.VerifyHashedPassword(u.Password, password)).First();
+                User userConnected = listUser.Where(u => (u.Email.ToLower().Equals(email.ToLower())) && PasswordHashing.VerifyHashedPassword(u.Password, password)).First();
                 if (userConnected != null)
                 {
                     SessionPersiter.User = userConnected;
