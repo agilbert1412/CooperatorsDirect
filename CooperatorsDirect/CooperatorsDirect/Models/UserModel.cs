@@ -36,12 +36,18 @@ namespace CooperatorsDirect.Models
                 return null;
             }
         }
+
         public List<User> GetAll()
         {
             return listUser;
         }
 
-        public User Get(string email, string password)
+        public User GetUser(int id)
+        {
+            return listUser.Where(u => u.UserID == id).First();
+        }
+
+        public User GetUser(string email, string password)
         {
             if ((email == string.Empty || email == null) || (password == string.Empty || password == null))
             {
@@ -61,6 +67,7 @@ namespace CooperatorsDirect.Models
                 return null;
             }
         }
+
         public bool Delete(string email)
         {
             if (string.IsNullOrEmpty(email))
@@ -81,6 +88,7 @@ namespace CooperatorsDirect.Models
                 return false;
             }
         }
+
         public bool Insert(User user)
         {
             try
@@ -99,6 +107,7 @@ namespace CooperatorsDirect.Models
                 return false;
             }
         }
+
         public bool Edit(User user)
         {
             try

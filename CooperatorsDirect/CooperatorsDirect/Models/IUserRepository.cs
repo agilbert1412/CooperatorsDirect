@@ -12,7 +12,9 @@ namespace CooperatorsDirect.Models
 
         List<User> GetAll();
 
-        User Get(string email, string password);
+        User GetUser(int id);
+
+        User GetUser(string email, string password);
 
         bool Delete(string email);
 
