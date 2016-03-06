@@ -23,7 +23,7 @@
             <h2 class="form-signin-heading">Veuillez vous connecter</h2>
 
             <div>
-                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "Nom d'utilisateur, courriel ou numéro de police" })
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "Adresse courriel" })
             </div>
 
             <div>
@@ -35,7 +35,7 @@
             </div>
             
             <div>
-                @Html.ActionLink("S'inscrire", "Create", "User")
+                @Html.ActionLink("S'inscrire", "Register", "User")
             </div>
 
             @ViewBag.Error

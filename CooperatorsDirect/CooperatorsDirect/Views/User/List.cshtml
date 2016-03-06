@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<CooperatorsDirect.Models.User>
-
+@using CooperatorsDirect.Security
 @{
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,9 +7,12 @@
 
 <h2>List</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (SessionPersiter.User.Role == CooperatorsDirect.Models.Roles.admin)
+{
+    <p>
+        @Html.ActionLink("Créer un nouvel utilisateur", "Create")
+    </p>
+}
 <table class="table">
     <tr>
         <th>

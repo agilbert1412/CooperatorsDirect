@@ -43,10 +43,13 @@ namespace LevelUp.Controllers
         /// Page pour une liste des utilisateurs de l'application
         /// </summary>
         /// <returns></returns>
-        [CustomAuthorize(Roles.admin)]
+        [CustomAuthorize(Roles.admin, Roles.employe)]
         public ActionResult List()
         {
-            return View(repository.GetAll());
+            if (SessionPersiter.User.Role == Roles.admin)
+                return View(repository.GetAllUsers());
+            else
+                return View(repository.GetAllCustomers());
         }
 
         /// <summary>
@@ -72,12 +75,39 @@ namespace LevelUp.Controllers
         }
 
         /// <summary>
-        /// Page de création du contrôler. Ici c'est la page d'inscription d'un client
+        /// Page d'inscription d'un client
         /// </summary>
         /// <returns></returns>
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Page de création d'un utilisateur par l'admin
+        /// </summary>
+        /// <returns></returns>
+        [CustomAuthorize(Roles.admin)]
         public ActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost, ActionName("Register")]
+        public ActionResult Register(User user)
+        {
+
+            UserModel userMod = new UserModel();
+            if (userMod.Find(user.Email) != null)
+            {
+                ViewBag.UsernameError = "L'adresse courriel est déjà utilisée doit être unique";
+            }
+
+            if (!userMod.Insert(user))
+            {
+                return View("Register");
+            }
+            return View("Index");
         }
 
         [HttpPost, ActionName("Create")]
@@ -94,7 +124,7 @@ namespace LevelUp.Controllers
             {
                 return View("Create");
             }
-            return View("Index");
+            return View("List");
         }
 
 
