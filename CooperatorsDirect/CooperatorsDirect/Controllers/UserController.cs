@@ -33,18 +33,42 @@ namespace LevelUp.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            return View();
+            if (SessionPersiter.User == null)
+                return View();
+            else
+                return RedirectToAction("Home");
+        }
+
+        /// <summary>
+        /// Page pour une liste des utilisateurs de l'application
+        /// </summary>
+        /// <returns></returns>
+        [CustomAuthorize(Roles.admin)]
+        public ActionResult List()
+        {
+            return View(repository.GetAll());
         }
 
         /// <summary>
         /// Page d'un client
         /// </summary>
         /// <returns></returns>
+        [CustomAuthorize(Roles.admin, Roles.reparateur, Roles.employe, Roles.client)]
         public ActionResult Details(int id = -1)
         {
             if (id == -1)
+            {
                 id = SessionPersiter.User.UserID;
-            return View(repository.GetAll().Where(u => u.UserID == id).First());
+            }
+            else
+            {
+                if (SessionPersiter.User.Role != Roles.admin && SessionPersiter.User.UserID != id)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            User user = repository.GetUser(id);
+            return View(user);
         }
 
         /// <summary>
@@ -84,7 +108,7 @@ namespace LevelUp.Controllers
         public ActionResult connexion(string email, string password)
         {
             UserModel userMod = new UserModel();
-            User userConnected = userMod.Get(email, password);
+            User userConnected = userMod.GetUser(email, password);
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)
                 || userConnected == null)
             {

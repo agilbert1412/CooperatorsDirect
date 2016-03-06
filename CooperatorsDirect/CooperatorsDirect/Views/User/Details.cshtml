@@ -1,14 +1,22 @@
 ﻿@model CooperatorsDirect.Models.User
 
+@using CooperatorsDirect.Security
+
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+@if (SessionPersiter.User.UserID == Model.UserID)
+{ 
+    <h2>Mon profil</h2>
+}
+else
+{
+    <h2>Profil @Model.Role</h2>
+}
 
 <div>
-    <h4>User</h4>
     <hr />
     <dl class="dl-horizontal">
 
@@ -57,7 +65,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DateNaissance.ToShortDateString())
+            @Model.DateNaissance.ToLongDateString()
         </dd>
 
         <dt>
@@ -68,13 +76,13 @@
             @Html.DisplayFor(model => model.Adresse)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.Role)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Role)
-        </dd>
+        </dd>*@
 
     </dl>
 </div>

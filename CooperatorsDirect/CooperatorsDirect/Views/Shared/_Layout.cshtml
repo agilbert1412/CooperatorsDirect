@@ -33,13 +33,14 @@
                 @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
-                </ul>
                 @if (SessionPersiter.User != null)
                 {
+                    <ul class="nav navbar-nav">
+                        @if (SessionPersiter.User.Role == CooperatorsDirect.Models.Roles.admin)
+                        {
+                            <li>@Html.ActionLink("Utilisateurs", "List", "User")</li>
+                        }
+                    </ul>
                     string message = "Bonjour " + SessionPersiter.User.Prenom + "!";
                     <ul class="nav navbar-nav navbar-right">
                         <li>@Html.ActionLink(message, "Details", "User")</li>
