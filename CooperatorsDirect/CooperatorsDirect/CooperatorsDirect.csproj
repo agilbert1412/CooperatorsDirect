@@ -170,6 +170,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Accident.cs" />
+    <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\Police.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Security\CustomPrincipal.cs" />
     <Compile Include="Models\IUserRepository.cs" />
