@@ -11,22 +11,34 @@ namespace CooperatorsDirect.Models
     {
         public int AccidentID { get; set; }
 
+        [Display(Name = "Date du rapport d'accident")]
         public DateTime DateAccidentEnregistre { get; set; }
 
+        [Display(Name = "Date et heure de l'accident")]
         public DateTime DateAccidentProduit { get; set; }
 
+        [Display(Name = "Lieu de l'accident")]
         public string Localisation { get; set; }
 
+        [Display(Name = "Raison du déplacement")]
         public string RaisonDeplacement { get; set; }
 
+        [Display(Name = "Blessures dans le véhicule (si oui, indiquer le nom et prénom du blessé, sa date de naissance, "
+            + " sa position dans le véhicule et si la ceinture de sécurité était porté")]
         public string Blessures { get; set; }
 
+        [Display(Name = "Témoins de l'accident")]
         public string Temoins { get; set; }
 
+        [Display(Name = "Information sur l'autre véhicule impliqué (nom, adresse, numéro de téléphone, "
+            +"numéro de permis de conduire, numéro de certificat d’immatriculation et coordonnées de l’assureur.)")]
         public string InformationsAutreVoiture { get; set; }
 
+        [Display(Name = "Information supplémentaire (Si le cas n'est pas couvert par les situations précédentes, "
+            +"fournir ici la description la plus complète possible de l'incident)")]
         public string DetailsSupplementaires { get; set; }
 
+        [Display(Name = "Photo de l'accident et du constat à l'amiable")]
         public List<UneImage> Photographies { get; set; }
 
         [Display(Name = "Il y a eu une collision entre au moins 2 véhicules")]
@@ -150,23 +162,23 @@ namespace CooperatorsDirect.Models
         PrioriteDePassage,
         [Display(Name = "Panneau d'arrêt et feu de signalisation défecteux ou inopérant")]
         ArretOuFeuDefectueux,
-        [Display(Name = "")]
+        [Display(Name = "Véhicule quittant une chaussées latérale")]
         VehiculeQuittantChausseeLaterale,
-        [Display(Name = "")]
+        [Display(Name = "Non respect de la signalisation")]
         NonRespectSignalisation,
-        [Display(Name = "")]
+        [Display(Name = "Virage sur une flèche verte")]
         VirageSurFlecheVerte,
-        [Display(Name = "")]
+        [Display(Name = "Virage à droite sur un feu rouge")]
         VirageADroiteSurFeuRouge,
-        [Display(Name = "")]
+        [Display(Name = "Marche arrière et demi-tour")]
         MarcheArriereDemiTour,
-        [Display(Name = "")]
+        [Display(Name = "Ouverture d'une portière")]
         OuvertureDunePortiere,
-        [Display(Name = "")]
+        [Display(Name = "Collision en chaîne")]
         CollisionEnChaine,
-        [Display(Name = "")]
+        [Display(Name = "Carambolage")]
         Carambolage,
-        [Display(Name = "")]
+        [Display(Name = "Collision survenant dans un parc de stationnement sans signalisation")]
         CollisionParcStationnementSansSignalisation
     }
 }

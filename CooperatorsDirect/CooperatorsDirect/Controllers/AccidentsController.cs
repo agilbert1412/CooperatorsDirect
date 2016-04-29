@@ -8,7 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using CooperatorsDirect.DAL;
 using CooperatorsDirect.Models;
-using CooperatorsDirect.Security;
 
 namespace CooperatorsDirect.Controllers
 {
@@ -43,7 +42,7 @@ namespace CooperatorsDirect.Controllers
             return View();
         }
 
-        // GET: Accidents/Create
+        // GET: Accidents/Rapporter
         public ActionResult Rapporter()
         {
             return View();
@@ -54,7 +53,7 @@ namespace CooperatorsDirect.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AccidentID,DateAccidentEnregistre,AuMoinsDeuxVehicules,ProduitAuQuebec,ProprietairesIdentifies,ProprietairesDifferents,ConducteurHeurtePropreVehicule,Details,SituationVehicules,CirconstancesAccident,NumeroVehicule")] Accident accident)
+        public ActionResult Create([Bind(Include = "AccidentID,DateAccidentEnregistre,DateAccidentProduit,Localisation,RaisonDeplacement,Blessures,Temoins,InformationsAutreVoiture,DetailsSupplementaires,AuMoinsDeuxVehicules,ProduitAuQuebec,ProprietairesIdentifies,ProprietairesDifferents,ConducteurHeurtePropreVehicule,Details,SituationVehicules,CirconstancesAccident,NumeroVehicule")] Accident accident)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +85,7 @@ namespace CooperatorsDirect.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AccidentID,DateAccidentEnregistre,AuMoinsDeuxVehicules,ProduitAuQuebec,ProprietairesIdentifies,ProprietairesDifferents,ConducteurHeurtePropreVehicule,Details,SituationVehicules,CirconstancesAccident,NumeroVehicule")] Accident accident)
+        public ActionResult Edit([Bind(Include = "AccidentID,DateAccidentEnregistre,DateAccidentProduit,Localisation,RaisonDeplacement,Blessures,Temoins,InformationsAutreVoiture,DetailsSupplementaires,AuMoinsDeuxVehicules,ProduitAuQuebec,ProprietairesIdentifies,ProprietairesDifferents,ConducteurHeurtePropreVehicule,Details,SituationVehicules,CirconstancesAccident,NumeroVehicule")] Accident accident)
         {
             if (ModelState.IsValid)
             {
