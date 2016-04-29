@@ -47,7 +47,7 @@
                         }
                         @if (SessionPersiter.User.Role == CooperatorsDirect.Models.Roles.client)
                         {
-                            <li>@Html.ActionLink("Rapporter un accident", "Create", "Accidents")</li>
+                            <li>@Html.ActionLink("Rapporter un accident", "Rapporter", "Accidents")</li>
                         }
                     </ul>
                     string message = "Bonjour " + SessionPersiter.User.Prenom + "!";

@@ -163,6 +163,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccessDeniedController.cs" />
+    <Compile Include="Controllers\AccidentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAL\CooperatorsContext.cs" />
@@ -173,6 +174,7 @@
     <Compile Include="Models\Accident.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Police.cs" />
+    <Compile Include="Models\UneImage.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Security\CustomPrincipal.cs" />
     <Compile Include="Models\IUserRepository.cs" />
@@ -183,7 +185,6 @@
     <Compile Include="Security\PasswordHashing.cs" />
     <Compile Include="Security\SessionPersiter.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Views\AccidentsController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -249,6 +250,7 @@
     <Content Include="Views\Accidents\Details.cshtml" />
     <Content Include="Views\Accidents\Edit.cshtml" />
     <Content Include="Views\Accidents\Index.cshtml" />
+    <Content Include="Views\Accidents\Rapporter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
