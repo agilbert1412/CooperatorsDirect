@@ -100,30 +100,55 @@ namespace CooperatorsDirect.Models
 
     public enum SituationAccident
     {
+        [Display(Name = "Collision entre deux véhicules circulant sur la même voie")]
         CirculantMemeVoie,
+        [Display(Name = "Virage sur une chaussée latérale ou dans une entrée")]
         VirageChausseeLaterale,
+        [Display(Name = "Véhicule prenant un stationnement ou s'engageant dans un parc de stationnement")]
         VehiculePrenantStationnement,
+        [Display(Name = "Véhicule quittant un stationnement")]
         VehiculeQuittantStationnement,
+        [Display(Name = "Véhicule en stationnement")]
         VehiculeEnStationnement,
+        [Display(Name = "Véhicule en stationnement illégal hors agglomération et sans feux la nuit")]
         VehiculeEnStationnementIllegal,
+        [Display(Name = "Collision Latérale")]
         CollisionLaterale,
+        [Display(Name = "Changement de voie")]
         ChangementVoie,
+        [Display(Name = "Dépassement sur des chaussées latérales")]
         DepassementChausseeLaterale,
+        [Display(Name = "Dépassement sur des chaussées latérale dans une intersection")]
         DepassementChausseeLateraleIntersection,
+        [Display(Name = "Véhicule chevauchant l'axe médiant")]
         VehiculeChevauchantAxeMediant,
+        [Display(Name = "Véhicule dont la position ne peut pas être déterminée")]
         VehiculesPositionIndeterminee,
+        [Display(Name = "Véhicule chevauchant une ligne continue")]
         VehiculeChevauchantLigneContinue,
+        [Display(Name = "Priorité à droite")]
         PrioriteADroite,
+        [Display(Name = "Priorité de passage")]
         PrioriteDePassage,
+        [Display(Name = "Panneau d'arrêt et feu de signalisation défecteux ou inopérant")]
         ArretOuFeuDefectueux,
+        [Display(Name = "")]
         VehiculeQuittantChausseeLaterale,
+        [Display(Name = "")]
         NonRespectSignalisation,
+        [Display(Name = "")]
         VirageSurFlecheVerte,
+        [Display(Name = "")]
         VirageADroiteSurFeuRouge,
+        [Display(Name = "")]
         MarcheArriereDemiTour,
+        [Display(Name = "")]
         OuvertureDunePortiere,
+        [Display(Name = "")]
         CollisionEnChaine,
+        [Display(Name = "")]
         Carambolage,
+        [Display(Name = "")]
         CollisionParcStationnementSansSignalisation
     }
 }
