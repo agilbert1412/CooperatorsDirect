@@ -183,6 +183,7 @@
     <Compile Include="Security\PasswordHashing.cs" />
     <Compile Include="Security\SessionPersiter.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Views\AccidentsController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -243,6 +244,11 @@
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\List.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\Accidents\Create.cshtml" />
+    <Content Include="Views\Accidents\Delete.cshtml" />
+    <Content Include="Views\Accidents\Details.cshtml" />
+    <Content Include="Views\Accidents\Edit.cshtml" />
+    <Content Include="Views\Accidents\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

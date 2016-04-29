@@ -12,6 +12,8 @@ namespace CooperatorsDirect.Models
 
         public int AccidentID { get; set; }
 
+        public DateTime DateAccidentEnregistre { get; set; }
+
         [Display(Name = "Il y a eu une collision entre au moins 2 véhicules")]
         public bool AuMoinsDeuxVehicules { get; set; }
 
@@ -80,7 +82,8 @@ namespace CooperatorsDirect.Models
 
         public static double[] GetResponsabilities(SituationAccident sit)
         {
-            throw new NotImplementedException("Retourne le pourcentage de responsabilité des membres, en ordre.")
+            throw new NotImplementedException("Retourne le pourcentage de responsabilité des membres, en ordre.");
+            return new double[2]{ 1, 0 };
         }
     }
 

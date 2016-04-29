@@ -1,5 +1,5 @@
 ﻿@model CooperatorsDirect.Models.User
-
+@using CooperatorsDirect.Security
 @{
     ViewBag.Title = "Inscription";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -79,6 +79,16 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+@if (SessionPersiter.User != null && SessionPersiter.User.Role == CooperatorsDirect.Models.Roles.admin)
+{
+    <div>
+        @Html.ActionLink("Back to List", "List")
+    </div>
+}
+else
+{
+    <div>
+        @Html.ActionLink("Se connecter", "Index")
+    </div>
+}
+
