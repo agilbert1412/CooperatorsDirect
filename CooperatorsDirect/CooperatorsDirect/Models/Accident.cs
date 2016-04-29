@@ -9,7 +9,6 @@ namespace CooperatorsDirect.Models
 {
     public class Accident
     {
-
         public int AccidentID { get; set; }
 
         [Display(Name = "Date du rapport d'accident")]
@@ -40,7 +39,7 @@ namespace CooperatorsDirect.Models
         public string DetailsSupplementaires { get; set; }
 
         [Display(Name = "Photo de l'accident et du constat à l'amiable")]
-        public List<Bitmap> Photographies { get; set; }
+        public List<UneImage> Photographies { get; set; }
 
         [Display(Name = "Il y a eu une collision entre au moins 2 véhicules")]
         public bool AuMoinsDeuxVehicules { get; set; }

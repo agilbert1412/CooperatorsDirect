@@ -1,0 +1,130 @@
+﻿@model IEnumerable<CooperatorsDirect.Models.Accident>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DateAccidentEnregistre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateAccidentProduit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Localisation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RaisonDeplacement)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Blessures)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Temoins)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InformationsAutreVoiture)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DetailsSupplementaires)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AuMoinsDeuxVehicules)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProduitAuQuebec)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProprietairesIdentifies)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProprietairesDifferents)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConducteurHeurtePropreVehicule)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Details)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SituationVehicules)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CirconstancesAccident)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroVehicule)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateAccidentEnregistre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateAccidentProduit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Localisation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RaisonDeplacement)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Blessures)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Temoins)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InformationsAutreVoiture)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DetailsSupplementaires)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AuMoinsDeuxVehicules)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProduitAuQuebec)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProprietairesIdentifies)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProprietairesDifferents)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConducteurHeurtePropreVehicule)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Details)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SituationVehicules)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CirconstancesAccident)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroVehicule)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AccidentID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.AccidentID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AccidentID })
+        </td>
+    </tr>
+}
+
+</table>

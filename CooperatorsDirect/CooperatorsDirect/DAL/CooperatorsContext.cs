@@ -17,6 +17,8 @@ namespace CooperatorsDirect.DAL
         
         public DbSet<User> Clients { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Accident> Accidents { get; set; }
+        public DbSet<UneImage> Images { get; set; }
         
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -29,6 +31,5 @@ namespace CooperatorsDirect.DAL
             Clients.Add(user);
         }
 
-        public System.Data.Entity.DbSet<CooperatorsDirect.Models.Accident> Accidents { get; set; }
     }
 }
