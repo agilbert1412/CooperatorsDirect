@@ -13,12 +13,14 @@ namespace CooperatorsDirect.Models
     {
 
         List<User> listUser;
+        List<Police> listPolices;
         CooperatorsContext CooperatorsContext;
 
         public UserModel()
         {
             CooperatorsContext = new CooperatorsContext();
             listUser = CooperatorsContext.Clients.ToList();
+            listPolices = CooperatorsContext.Polices.ToList();
         }
 
         public User Find(string email)
@@ -35,6 +37,21 @@ namespace CooperatorsDirect.Models
             {
                 return null;
             }
+        }
+
+        public Police Find(string id)
+        {
+            if (String.IsNullOrWhiteSpace(id))
+                return null;
+            try
+            {
+                return listPolices.Where(p => p.PoliceID == id).First();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            
         }
 
         public List<User> GetAllUsers()
