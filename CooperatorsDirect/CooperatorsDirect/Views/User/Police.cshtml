@@ -1,0 +1,26 @@
+﻿@model CooperatorsDirect.Models.Police
+
+@{
+    ViewBag.Title = "Police";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Police</h2>
+
+<div>
+    <h4>Police</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Retour au profil", "Details", new { id = Model.UserID })
+</p>

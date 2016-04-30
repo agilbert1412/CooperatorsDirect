@@ -7,7 +7,7 @@ namespace CooperatorsDirect.Models
 {
     public class Police
     {
-        public int PoliceID { get; set; }
+        public string PoliceID { get; set; }
         public int UserID { get; set; }
     }
 }

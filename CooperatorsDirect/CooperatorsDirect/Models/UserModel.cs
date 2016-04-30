@@ -39,7 +39,7 @@ namespace CooperatorsDirect.Models
             }
         }
 
-        public Police Find(string id)
+        public Police FindPolice(string id)
         {
             if (String.IsNullOrWhiteSpace(id))
                 return null;

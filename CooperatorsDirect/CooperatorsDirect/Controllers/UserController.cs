@@ -153,6 +153,34 @@ namespace LevelUp.Controllers
         }
 
         /// <summary>
+        /// Page consultation d'une police
+        /// </summary>
+        /// <returns></returns>
+        [CustomAuthorize(Roles.admin, Roles.employe, Roles.client)]
+        public ActionResult Police(string id)
+        {
+            
+            if (String.IsNullOrWhiteSpace(id))
+                return RedirectToAction("Index", "Home");
+
+            var laPolice = repository.FindPolice(id);
+
+            if (laPolice != null)
+            {
+                if (SessionPersiter.User.Role == Roles.admin || SessionPersiter.User.Role == Roles.employe)
+                    return View(laPolice);
+                else
+                {
+                    if (SessionPersiter.User.NoPolice == id && SessionPersiter.User.UserID == laPolice.UserID)
+                        return View(laPolice);
+                }
+            }
+
+            return RedirectToAction("Index", "Home");
+
+        }
+
+        /// <summary>
         /// Retour à la page index
         /// </summary>
         /// <returns></returns>
