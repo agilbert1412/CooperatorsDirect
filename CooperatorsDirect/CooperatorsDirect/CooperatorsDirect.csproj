@@ -251,6 +251,7 @@
     <Content Include="Views\Accidents\Edit.cshtml" />
     <Content Include="Views\Accidents\Index.cshtml" />
     <Content Include="Views\Accidents\Rapporter.cshtml" />
+    <Content Include="Views\User\Police.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

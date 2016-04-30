@@ -19,6 +19,7 @@ namespace CooperatorsDirect.DAL
         public DbSet<Message> Messages { get; set; }
         public DbSet<Accident> Accidents { get; set; }
         public DbSet<UneImage> Images { get; set; }
+        public DbSet<Police> Polices { get; set; }
         
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

@@ -10,6 +10,8 @@ namespace CooperatorsDirect.Models
 
         User Find(string email);
 
+        Police FindPolice(string id);
+
         List<User> GetAllUsers();
 
         List<User> GetAllCustomers();
