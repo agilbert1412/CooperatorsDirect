@@ -12,9 +12,13 @@ namespace CooperatorsDirect.Models
         public int AccidentID { get; set; }
 
         [Display(Name = "Date du rapport d'accident")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateAccidentEnregistre { get; set; }
 
         [Display(Name = "Date et heure de l'accident")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateAccidentProduit { get; set; }
 
         [Display(Name = "Lieu de l'accident")]

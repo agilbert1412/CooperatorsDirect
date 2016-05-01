@@ -45,7 +45,12 @@ namespace CooperatorsDirect.Controllers
         // GET: Accidents/Rapporter
         public ActionResult Rapporter()
         {
-            return View();
+            Accident a = new Accident()
+            {
+                DateAccidentEnregistre = DateTime.Now,
+                DateAccidentProduit = DateTime.Now,
+            };
+            return View(a);
         }
 
         // POST: Accidents/Create
