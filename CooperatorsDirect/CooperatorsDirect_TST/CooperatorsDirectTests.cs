@@ -3,12 +3,51 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CooperatorsDirect;
 using CooperatorsDirect.Models;
 using CooperatorsDirect.Security;
+using System.Linq;
+using System.Drawing;
+using System.Collections.Generic;
 
 namespace CooperatorsDirect_TST
 {
     [TestClass]
     public class CooperatorsDirectTests
     {
+
+        #region Images
+
+        [TestMethod]
+        [TestProperty("Category", "Images")]
+        public void GetImagesTest()
+        {
+            var acc = new Accident();
+            var values = Enum.GetValues(typeof(SituationAccident)).Cast<SituationAccident>();
+            var cas0 = new List<SituationAccident>() { SituationAccident.VehiculeEnStationnement, SituationAccident.VehiculeEnStationnementIllegal, SituationAccident.NonRespectSignalisation, SituationAccident.VirageSurFlecheVerte, SituationAccident.VirageADroiteSurFeuRouge, SituationAccident.MarcheArriereDemiTour, SituationAccident.OuvertureDunePortiere, SituationAccident.CollisionParcStationnementSansSignalisation};
+            var cas1 = new List<SituationAccident>() { SituationAccident.VehiculeChevauchantLigneContinue, SituationAccident.PrioriteDePassage, SituationAccident.ArretOuFeuDefectueux, SituationAccident.VehiculeQuittantChausseeLaterale, SituationAccident.CollisionEnChaine, SituationAccident.Carambolage };
+            var cas2 = new List<SituationAccident>() { SituationAccident.DepassementChausseeLateraleIntersection };
+            var cas3 = new List<SituationAccident>() { SituationAccident.CirculantMemeVoie, SituationAccident.VirageChausseeLaterale, SituationAccident.VehiculePrenantStationnement, SituationAccident.VehiculeQuittantStationnement, SituationAccident.CollisionLaterale, SituationAccident.ChangementVoie, SituationAccident.DepassementChausseeLaterale, SituationAccident.VehiculeChevauchantAxeMediant, SituationAccident.VehiculesPositionIndeterminee, SituationAccident.PrioriteADroite };
+            var dicCas = new Dictionary<int, List<SituationAccident>>();
+            dicCas.Add(0, cas0);
+            dicCas.Add(1, cas1);
+            dicCas.Add(2, cas2);
+            dicCas.Add(3, cas3);
+
+            foreach (var enumVal in values)
+            {
+                acc.CirconstancesAccident = enumVal;
+                var lstImages = acc.GetExamples();
+                for (int i = 0; i < 4; i++)
+                {
+                    //if (dicCas[i].Contains(enumVal))
+                    //    Assert.AreEqual(lstImages.Count, i);
+                    //else
+                    //    Assert.AreNotEqual(lstImages.Count, i);
+                }
+            }
+        }
+
+        #endregion
+
+
         #region Hashing
 
         [TestMethod]
