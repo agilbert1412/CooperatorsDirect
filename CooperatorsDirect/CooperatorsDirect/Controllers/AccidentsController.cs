@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using CooperatorsDirect.DAL;
 using CooperatorsDirect.Models;
+using CooperatorsDirect.Security;
 
 namespace CooperatorsDirect.Controllers
 {
@@ -16,12 +17,14 @@ namespace CooperatorsDirect.Controllers
         private CooperatorsContext db = new CooperatorsContext();
 
         // GET: Accidents
+        [CustomAuthorize(Roles.admin, Roles.client, Roles.employe, Roles.reparateur)]
         public ActionResult Index()
         {
             return View(db.Accidents.ToList());
         }
 
         // GET: Accidents/Details/5
+        [CustomAuthorize(Roles.admin, Roles.client, Roles.employe, Roles.reparateur)]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,12 +40,14 @@ namespace CooperatorsDirect.Controllers
         }
 
         // GET: Accidents/Create
+        [CustomAuthorize(Roles.admin, Roles.employe, Roles.reparateur)]
         public ActionResult Create()
         {
             return View();
         }
 
         // GET: Accidents/Rapporter
+        [CustomAuthorize(Roles.admin, Roles.client, Roles.employe, Roles.reparateur)]
         public ActionResult Rapporter()
         {
             Accident a = new Accident()
@@ -59,6 +64,23 @@ namespace CooperatorsDirect.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "AccidentID,DateAccidentEnregistre,DateAccidentProduit,Localisation,RaisonDeplacement,Blessures,Temoins,InformationsAutreVoiture,DetailsSupplementaires,AuMoinsDeuxVehicules,ProduitAuQuebec,ProprietairesIdentifies,ProprietairesDifferents,ConducteurHeurtePropreVehicule,Details,SituationVehicules,CirconstancesAccident,NumeroVehicule")] Accident accident)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Accidents.Add(accident);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(accident);
+        }
+
+        // POST: Accidents/Create
+        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
+        // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Rapporter([Bind(Include = "AccidentID,DateAccidentEnregistre,DateAccidentProduit,Localisation,RaisonDeplacement,Blessures,Temoins,InformationsAutreVoiture,DetailsSupplementaires,AuMoinsDeuxVehicules,ProduitAuQuebec,ProprietairesIdentifies,ProprietairesDifferents,ConducteurHeurtePropreVehicule,Details,SituationVehicules,CirconstancesAccident,NumeroVehicule")] Accident accident)
         {
             if (ModelState.IsValid)
             {

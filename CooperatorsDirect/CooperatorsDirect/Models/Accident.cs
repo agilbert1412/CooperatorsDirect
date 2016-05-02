@@ -87,7 +87,11 @@ namespace CooperatorsDirect.Models
 
         public Accident()
         {
-
+            AuMoinsDeuxVehicules = true;
+            ProduitAuQuebec = true;
+            ProprietairesIdentifies = true;
+            ProprietairesDifferents = true;
+            ConducteurHeurtePropreVehicule = false;
         }
 
         public List<Bitmap> GetExamples()
@@ -105,10 +109,39 @@ namespace CooperatorsDirect.Models
             return Accident.GetResponsabilities(CirconstancesAccident);
         }
 
+        /// <summary>
+        /// Retourne les images d'exemples, ou une liste vide si il n'y en a pas
+        /// </summary>
+        /// <param name="sit">Situation de l'accident</param>
+        /// <returns>Liste d'images selon la situation</returns>
         public static List<Bitmap> GetExamples(SituationAccident sit)
         {
-            throw new NotImplementedException("Retourne les images d'exemples, ou une liste vide si il n'y en a pas");
-            return new List<Bitmap>();
+
+            // à compléter en mettant les images sur http://photobucket.com/
+
+            var liste = new List<Bitmap>();
+            switch (sit)
+            {
+                case SituationAccident.ArretOuFeuDefectueux:
+                    liste.Add(getImage("http://i1382.photobucket.com/albums/ah245/PhotobucketMKTG/Print_Shop_Intro.png~original"));
+                    break;
+                case SituationAccident.Carambolage:
+                    // liste.Add(getImage("URL"));
+                    // liste.Add(getImage("URL"));
+                    // liste.Add(getImage("URL"));
+                    break;
+                default:
+                    break;
+            }
+            return liste;
+        }
+
+        private static Bitmap getImage(string url)
+        {
+            System.Net.WebRequest request = System.Net.WebRequest.Create(url);
+            System.Net.WebResponse response = request.GetResponse();
+            System.IO.Stream responseStream = response.GetResponseStream();
+            return new Bitmap(responseStream);
         }
 
         public static double[] GetResponsabilities(SituationAccident sit)

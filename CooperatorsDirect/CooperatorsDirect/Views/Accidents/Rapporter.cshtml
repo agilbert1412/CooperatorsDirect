@@ -48,7 +48,7 @@
                 @Html.LabelFor(model => model.AuMoinsDeuxVehicules, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <div class="checkbox">
-                        @Html.EditorFor(model => model.AuMoinsDeuxVehicules)
+                        @Html.CheckBoxFor(model => model.AuMoinsDeuxVehicules, new { @checked = "checked" })
                         @Html.ValidationMessageFor(model => model.AuMoinsDeuxVehicules, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -109,6 +109,10 @@
         </div>
 
         <div id="page3">
+
+            <div class="table" id="tableCirconstances">
+                
+            </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.CirconstancesAccident, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -185,8 +189,8 @@
             </div>
         </div>
 
-        <input style="display:inline" type="button" value="Previous" onclick="Previous();">
-        <input style="display:inline" type="button" value="Next" onclick="Next();">
+        <input style="display:inline" type="button" value="Previous" id="btnPrevious" onclick="Previous();">
+        <input style="display:inline" type="button" value="Next" id="btnNext" onclick="Next();">
 
     </div>
 }
@@ -224,18 +228,22 @@
         if (num === 1) {
             curEtape = 1;
             etape1.style.display = "block";
+            document.getElementById("btnPrevious").disabled = true;
         }
         if (num === 2) {
             curEtape = 2;
             etape2.style.display = "block";
+            document.getElementById("btnPrevious").disabled = false;
         }
         if (num === 3) {
             curEtape = 3;
             etape3.style.display = "block";
+            document.getElementById("btnNext").disabled = false;
         }
         if (num === 4) {
             curEtape = 4;
             etape4.style.display = "block";
+            document.getElementById("btnNext").disabled = true;
         }
     }
 
