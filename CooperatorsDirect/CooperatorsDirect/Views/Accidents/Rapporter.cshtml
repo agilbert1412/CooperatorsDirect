@@ -11,7 +11,7 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
+    <div id="divFormComplete" class="form-horizontal">
         <h4>Accident</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -42,11 +42,11 @@
 
         <h3 id="IndicateurEtape">Étape 1</h3>
 
-        <div id="page1">
+        <div id="page1" class="simple-tooltip">
 
-            <div class="form-group">
+            <div id="divAuMoinsDeuxVehicules" class="form-group simple-tooltip-AuMoinsDeuxVehicules">
                 @Html.LabelFor(model => model.AuMoinsDeuxVehicules, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                <div class="col-md-2">
                     <div class="checkbox">
                         @Html.CheckBoxFor(model => model.AuMoinsDeuxVehicules, new { @checked = "checked" })
                         @Html.ValidationMessageFor(model => model.AuMoinsDeuxVehicules, "", new { @class = "text-danger" })
@@ -54,7 +54,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div id="divProduitAuQuebec" class="form-group simple-tooltip simple-tooltip-ProduitAuQuebec">
                 @Html.LabelFor(model => model.ProduitAuQuebec, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <div class="checkbox">
@@ -199,11 +199,17 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script type="text/javascript" src="~/Content/jquery.simpletip-1.3.1.js"></script>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script>
 
     var textBoxPosition = document.getElementById("Localisation");
     var messagePosition = document.getElementById("messageLocalisation");
+
+    var master = $('#divFormComplete');
+    var content = $(master).find('.content');
+    var tooltips = $(master).find('.simple-tooltip');
 
     var curEtape = 1;
 
@@ -212,10 +218,29 @@
     var etape3 = document.getElementById("page3");
     var etape4 = document.getElementById("page4");
 
+    var tooltipContents = {
+        'AuMoinsDeuxVehicules': 'Content for tooltip 1',
+        'ProduitAuQuebec': 'Content for tooltip 2'
+    };
+
 
     window.onload = function () {
         getLocation();
         ShowEtape(1);
+
+        tooltips.find('.simple-tooltip-AuMoinsDeuxVehicules').simpletip({
+            content: tooltipContents['AuMoinsDeuxVehicules'],
+            position: 'top',
+            hideEffect: 'slide',
+            offset: [-250, 50]
+        });
+
+        tooltips.find('.simple-tooltip-ProduitAuQuebec').simpletip({
+            content: tooltipContents['ProduitAuQuebec'],
+            position: 'top',
+            hideEffect: 'slide',
+            offset: [-250, 50]
+        });
     }
 
     function ShowEtape(num)
