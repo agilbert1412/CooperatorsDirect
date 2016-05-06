@@ -94,6 +94,52 @@ namespace CooperatorsDirect.Models
             ConducteurHeurtePropreVehicule = false;
         }
 
+        public static List<SituationAccident> GetCirconstances(SituationVehicule sit)
+        {
+            var lst = new List<SituationAccident>();
+            switch (sit)
+            {
+                case SituationVehicule.MemeDirectionMemeChaussee:
+                    lst.Add(SituationAccident.CirculantMemeVoie);
+                    lst.Add(SituationAccident.VirageChausseeLaterale);
+                    lst.Add(SituationAccident.VehiculePrenantStationnement);
+                    lst.Add(SituationAccident.VehiculeQuittantStationnement);
+                    lst.Add(SituationAccident.VehiculeEnStationnement);
+                    lst.Add(SituationAccident.VehiculeEnStationnementIllegal);
+                    break;
+                case SituationVehicule.MemeDirectionVoieDifferente:
+                    lst.Add(SituationAccident.CollisionLaterale);
+                    lst.Add(SituationAccident.ChangementVoie);
+                    lst.Add(SituationAccident.DepassementChausseeLaterale);
+                    lst.Add(SituationAccident.DepassementChausseeLateraleIntersection);
+                    break;
+                case SituationVehicule.SensInverse:
+                    lst.Add(SituationAccident.VehiculeChevauchantAxeMediant);
+                    lst.Add(SituationAccident.VehiculesPositionIndeterminee);
+                    lst.Add(SituationAccident.VehiculeChevauchantLigneContinue);
+                    break;
+                case SituationVehicule.ProvenanceTransversaleOuLaterales:
+                    lst.Add(SituationAccident.PrioriteADroite);
+                    lst.Add(SituationAccident.PrioriteDePassage);
+                    lst.Add(SituationAccident.ArretOuFeuDefectueux);
+                    lst.Add(SituationAccident.VehiculeQuittantChausseeLaterale);
+                    break;
+                case SituationVehicule.Autres:
+                    lst.Add(SituationAccident.NonRespectSignalisation);
+                    lst.Add(SituationAccident.VirageSurFlecheVerte);
+                    lst.Add(SituationAccident.VirageADroiteSurFeuRouge);
+                    lst.Add(SituationAccident.MarcheArriereDemiTour);
+                    lst.Add(SituationAccident.OuvertureDunePortiere);
+                    lst.Add(SituationAccident.CollisionEnChaine);
+                    lst.Add(SituationAccident.Carambolage);
+                    lst.Add(SituationAccident.CollisionParcStationnementSansSignalisation);
+                    break;
+                default:
+                    break;
+            }
+            return lst;
+        }
+
         public List<Bitmap> GetExamples()
         {
             return Accident.GetExamples(CirconstancesAccident);
