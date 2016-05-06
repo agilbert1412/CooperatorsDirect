@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using CooperatorsDirect.DAL;
 using CooperatorsDirect.Models;
 using CooperatorsDirect.Security;
+using System.Web.Script.Serialization;
 
 namespace CooperatorsDirect.Controllers
 {
@@ -56,6 +57,17 @@ namespace CooperatorsDirect.Controllers
                 DateAccidentProduit = DateTime.Now,
             };
             return View(a);
+        }
+
+        [HttpPost]
+        public string ExportCirconstanceJson(SituationVehicule sit)
+        {
+            var values = Accident.GetCirconstances(sit);
+            var dict = values.ToDictionary(e => e.ToString(), e => Convert.ToInt32(e));
+            var json = new JavaScriptSerializer().Serialize(dict);
+            var script = string.Format("{0}={1};", values, json);
+
+            return script;
         }
 
         // POST: Accidents/Create

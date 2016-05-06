@@ -111,7 +111,13 @@
         <div id="page3">
 
             <div class="table" id="tableCirconstances">
-                
+                @{
+                    foreach (var value in Enum.GetValues(Model.CirconstancesAccident.GetType()))
+                    {
+                        @Html.RadioButtonFor(model => model.CirconstancesAccident, value)
+                        @Html.Label(value.ToString())
+                    }
+                }
             </div>
 
             <div class="form-group">
@@ -220,14 +226,15 @@
 
     var tooltipContents = {
         'AuMoinsDeuxVehicules': 'Content for tooltip 1',
-        'ProduitAuQuebec': 'Content for tooltip 2'
+        'ProduitAuQuebec': 'Content for tooltip 2',
+        'ProprietairesIdentifies': 'Content for tooltip 3'
     };
 
 
     window.onload = function () {
         getLocation();
         ShowEtape(1);
-
+        
         tooltips.find('.simple-tooltip-AuMoinsDeuxVehicules').simpletip({
             content: tooltipContents['AuMoinsDeuxVehicules'],
             position: 'top',
@@ -264,6 +271,10 @@
             curEtape = 3;
             etape3.style.display = "block";
             document.getElementById("btnNext").disabled = false;
+            var dropdownSitVeh = document.getElementById("SituationVehicules");
+            $.post("@Url.Action("ExportCirconstanceJson", "Accidents")", { sit: dropdownSitVeh.options[dropdownSitVeh.selectedIndex].value }, function (data) {
+                alert(data);
+            });
         }
         if (num === 4) {
             curEtape = 4;
