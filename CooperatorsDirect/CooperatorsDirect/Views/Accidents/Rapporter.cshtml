@@ -64,7 +64,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div id="divProprietairesIdentifies" class="form-group simple-tooltip simple-tooltip-proprietairesidentifies">
                 @Html.LabelFor(model => model.ProprietairesIdentifies, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <div class="checkbox">
@@ -74,7 +74,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div id="divProprietairesDifferents" class="form-group simple-tooltip simple-tooltip-ProprietairesDifferents">
                 @Html.LabelFor(model => model.ProprietairesDifferents, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <div class="checkbox">
@@ -84,7 +84,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div id="divConducteurHeurtePropreVehicule" class="form-group simple-tooltip simple-tooltip-ConducteurHeurtePropreVehicule">
                 @Html.LabelFor(model => model.ConducteurHeurtePropreVehicule, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <div class="checkbox">
@@ -98,7 +98,7 @@
 
         <div id="page2">
 
-            <div class="form-group">
+            <div id="divSituationVehicules" class="form-group simple-tooltip simple-tooltip-SituationVehicules">
                 @Html.LabelFor(model => model.SituationVehicules, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EnumDropDownListFor(model => model.SituationVehicules, htmlAttributes: new { @class = "form-control" })
@@ -238,9 +238,10 @@
     var etape4 = document.getElementById("page4");
 
     var tooltipContents = {
-        'AuMoinsDeuxVehicules': 'Content for tooltip 1',
-        'ProduitAuQuebec': 'Content for tooltip 2',
-        'ProprietairesIdentifies': 'Content for tooltip 3'
+        'AuMoinsDeuxVehicules': "L'accident comporte-t-il au moins 2 véhicules? Dans le cas où il n'y a qu'un véhicule, veuillez décrire le plus précisemment possible le sinistre dans la section pour ajouter des informations puisque tous les cas ne sont pas détaillés.",
+        'ProduitAuQuebec': "",
+        'ProprietairesIdentifies': "Les cas de délis de fuite sont couvert par la protection au Chapitre B de votre contrat ",
+        'ProprietairesDifferents': ""
     };
 
 
