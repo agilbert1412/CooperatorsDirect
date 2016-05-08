@@ -112,11 +112,24 @@
 
             <div class="table" id="tableCirconstances">
                 @{
-                    foreach (var value in Enum.GetValues(Model.CirconstancesAccident.GetType()))
-                    {
-                        @Html.RadioButtonFor(model => model.CirconstancesAccident, value)
-                        @Html.Label(value.ToString())
-                    }
+                    int i = 0;
+                    int j = 0;
+                    <div class="form-group row">
+                        @foreach (var value in Enum.GetValues(Model.CirconstancesAccident.GetType()))
+                        {
+
+                            @Html.RadioButtonFor(model => model.CirconstancesAccident, value, new { @class = "col-xs-1" })
+                            @Html.Label(value.ToString(), new { @class = "col-xs-4" })
+                            i++;
+                            if (i > 1)
+                            {
+                                i = 0;
+                                j++;
+                                @Html.Raw("</div>")
+                                @Html.Raw("<div class=\"form-group row\">")
+                            }
+                        }
+                    </div>
                 }
             </div>
 
