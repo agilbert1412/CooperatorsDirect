@@ -118,8 +118,8 @@
                         @foreach (var value in Enum.GetValues(Model.CirconstancesAccident.GetType()))
                         {
 
-                            @Html.RadioButtonFor(model => model.CirconstancesAccident, value, new { @class = "col-xs-6" })
-                            @Html.Label(value.ToString())
+                            @Html.RadioButtonFor(model => model.CirconstancesAccident, value, new { @class = "col-xs-1" })
+                            @Html.Label(value.ToString(), new { @class = "col-xs-4" })
                             i++;
                             if (i > 1)
                             {
