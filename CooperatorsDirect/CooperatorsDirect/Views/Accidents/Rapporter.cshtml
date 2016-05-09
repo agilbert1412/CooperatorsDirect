@@ -218,7 +218,7 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script type="text/javascript" src="~/Content/jquery.js"></script>
 <script type="text/javascript" src="~/Content/jquery.simpletip-1.3.1.js"></script>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script>
@@ -287,9 +287,55 @@
             document.getElementById("btnNext").disabled = false;
             var dropdownSitVeh = document.getElementById("SituationVehicules");
             $.post("@Url.Action("ExportCirconstanceJson", "Accidents")", { sit: dropdownSitVeh.options[dropdownSitVeh.selectedIndex].value }, function (data) {
+                var divPage3 = document.getElementById("page3");
+                divPage3.innerHTML = "";
+
+                var divTable = document.createElement("div");
+                divTable.id = "tableCirconstances";
+                divTable.className = "table";
+                
+                var divRow = document.createElement("div");
+                divRow.classList.add("form-group");
+                divRow.classList.add("row");
+
                 alert(data);
+                alert(data.Length);
+                alert(data.Count);
+                alert(data[0]);
+                alert(data[6]);
+
+                divTable.appendChild(divRow);
+                divPage3.appendChild(divTable);
             });
         }
+        /*
+        <div id="page3" style="display: block;">
+
+            <div class="table" id="tableCirconstances">
+                    <div class="form-group row">
+                        <input checked="checked" class="col-xs-1" data-val="true" data-val-required="Le champ Circonstances de l'accident est requis." id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="CirculantMemeVoie">
+                        <label class="col-xs-4" for="CirculantMemeVoie">CirculantMemeVoie</label>
+                        <input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="VirageChausseeLaterale">
+                        <label class="col-xs-4" for="VirageChausseeLaterale">VirageChausseeLaterale</label>
+                    </div>
+                    <div class="form-group row">
+                        <input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="VehiculePrenantStationnement"><label class="col-xs-4" for="VehiculePrenantStationnement">VehiculePrenantStationnement</label>
+                        <input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="VehiculeQuittantStationnement"><label class="col-xs-4" for="VehiculeQuittantStationnement">VehiculeQuittantStationnement</label></div><div class="form-group row"><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="VehiculeEnStationnement"><label class="col-xs-4" for="VehiculeEnStationnement">VehiculeEnStationnement</label><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="VehiculeEnStationnementIllegal">
+                        <label class="col-xs-4" for="VehiculeEnStationnementIllegal">VehiculeEnStationnementIllegal</label></div><div class="form-group row">
+                        <input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="CollisionLaterale"><label class="col-xs-4" for="CollisionLaterale">CollisionLaterale</label><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="ChangementVoie"><label class="col-xs-4" for="ChangementVoie">ChangementVoie</label></div><div class="form-group row"><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="DepassementChausseeLaterale"><label class="col-xs-4" for="DepassementChausseeLaterale">DepassementChausseeLaterale</label>
+                        <input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="DepassementChausseeLateraleIntersection"><label class="col-xs-4" for="DepassementChausseeLateraleIntersection">DepassementChausseeLateraleIntersection</label></div><div class="form-group row"><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="VehiculeChevauchantAxeMediant"><label class="col-xs-4" for="VehiculeChevauchantAxeMediant">VehiculeChevauchantAxeMediant</label><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="VehiculesPositionIndeterminee"><label class="col-xs-4" for="VehiculesPositionIndeterminee">VehiculesPositionIndeterminee</label></div><div class="form-group row"><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="VehiculeChevauchantLigneContinue"><label class="col-xs-4" for="VehiculeChevauchantLigneContinue">VehiculeChevauchantLigneContinue</label><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="PrioriteADroite"><label class="col-xs-4" for="PrioriteADroite">PrioriteADroite</label></div><div class="form-group row">
+                        <input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="PrioriteDePassage"><label class="col-xs-4" for="PrioriteDePassage">PrioriteDePassage</label><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="ArretOuFeuDefectueux"><label class="col-xs-4" for="ArretOuFeuDefectueux">ArretOuFeuDefectueux</label></div><div class="form-group row"><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="VehiculeQuittantChausseeLaterale"><label class="col-xs-4" for="VehiculeQuittantChausseeLaterale">VehiculeQuittantChausseeLaterale</label>
+                        <input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="NonRespectSignalisation"><label class="col-xs-4" for="NonRespectSignalisation">NonRespectSignalisation</label>
+                        </div>
+                        <div class="form-group row"><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="VirageSurFlecheVerte">
+                        <label class="col-xs-4" for="VirageSurFlecheVerte">VirageSurFlecheVerte</label><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="VirageADroiteSurFeuRouge"><label class="col-xs-4" for="VirageADroiteSurFeuRouge">VirageADroiteSurFeuRouge</label></div>
+                    <div class="form-group row"><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="MarcheArriereDemiTour"><label class="col-xs-4" for="MarcheArriereDemiTour">MarcheArriereDemiTour</label><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="OuvertureDunePortiere"><label class="col-xs-4" for="OuvertureDunePortiere">OuvertureDunePortiere</label></div><div class="form-group row"><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="CollisionEnChaine"><label class="col-xs-4" for="CollisionEnChaine">CollisionEnChaine</label><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="Carambolage"><label class="col-xs-4" for="Carambolage">Carambolage</label></div><div class="form-group row"><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="CollisionParcStationnementSansSignalisation"><label class="col-xs-4" for="CollisionParcStationnementSansSignalisation">CollisionParcStationnementSansSignalisation</label>
+                    </div>
+
+            </div>
+
+        </div>
+        */
         if (num === 4) {
             curEtape = 4;
             etape4.style.display = "block";
