@@ -64,10 +64,10 @@ namespace CooperatorsDirect.Controllers
         {
             var values = Accident.GetCirconstances(sit);
             var dict = values.ToDictionary(e => e.ToString(), e => Convert.ToInt32(e));
-            var json = new JavaScriptSerializer().Serialize(dict);
+            var json = new JavaScriptSerializer().Serialize(dict.Keys);
             var script = string.Format("{0}={1};", values, json);
 
-            return script;
+            return json;
         }
 
         // POST: Accidents/Create

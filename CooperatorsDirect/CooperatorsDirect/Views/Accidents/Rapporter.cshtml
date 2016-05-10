@@ -294,15 +294,41 @@
                 divTable.id = "tableCirconstances";
                 divTable.className = "table";
                 
-                var divRow = document.createElement("div");
-                divRow.classList.add("form-group");
-                divRow.classList.add("row");
+                var divRow;
 
-                alert(data);
-                alert(data.Length);
-                alert(data.Count);
-                alert(data[0]);
-                alert(data[6]);
+                var jsonData = JSON.parse(data);
+
+                for (var i = 0; i < jsonData.length; i++)
+                {
+                    if (i % 2 == 0)
+                    {
+                        if (i != 0)
+                        {
+                            divTable.appendChild(divRow);
+                        }
+                        divRow = document.createElement("div");
+                        divRow.classList.add("form-group");
+                        divRow.classList.add("row");
+                    }
+                    var input = document.createElement("input");
+                    if (i == 0)
+                    {
+                        input.setAttribute("checked", "checked");
+                        input.setAttribute("data-val-required", "Le champ Circonstances de l'accident est requis.");
+                    }
+                    input.className = "col-xs-1";
+                    input.id = "CirconstancesAccident";
+                    input.name = "CirconstancesAccident";
+                    input.value = jsonData[i];
+                    input.type = "radio";
+                    divRow.appendChild(input);
+                    var label = document.createElement("label");
+                    label.className = "col-xs-4";
+                    label.setAttribute("for", jsonData[i]);
+                    label.innerText = jsonData[i];
+                    divRow.appendChild(label);
+                    //alert(jsonData[i]);
+                }
 
                 divTable.appendChild(divRow);
                 divPage3.appendChild(divTable);
