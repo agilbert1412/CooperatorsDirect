@@ -155,6 +155,33 @@ namespace CooperatorsDirect.Models
             return Accident.GetResponsabilities(CirconstancesAccident);
         }
 
+        public static List<String> GetExamplesPath(SituationAccident sit)
+        {
+
+            // à compléter en mettant les images sur http://photobucket.com/
+
+            var liste = new List<String>();
+
+            switch (sit)
+            {
+                case SituationAccident.ArretOuFeuDefectueux:
+                    liste.Add("http://i1382.photobucket.com/albums/ah245/PhotobucketMKTG/Print_Shop_Intro.png~original");
+                    break;
+                case SituationAccident.Carambolage:
+                    // liste.Add(getImage("URL"));
+                    // liste.Add(getImage("URL"));
+                    // liste.Add(getImage("URL"));
+                    break;
+                case SituationAccident.PrioriteADroite:
+                    liste.Add("http://i1382.photobucket.com/albums/ah245/PhotobucketMKTG/Print_Shop_Intro.png~original");
+                    break;
+                default:
+                    break;
+            }
+
+            return liste;
+        }
+
         /// <summary>
         /// Retourne les images d'exemples, ou une liste vide si il n'y en a pas
         /// </summary>
@@ -163,23 +190,15 @@ namespace CooperatorsDirect.Models
         public static List<Bitmap> GetExamples(SituationAccident sit)
         {
 
-            // à compléter en mettant les images sur http://photobucket.com/
+            var liste = GetExamplesPath(sit);
 
-            var liste = new List<Bitmap>();
-            switch (sit)
+            var listeBmp = new List<Bitmap>();
+            foreach (var str in liste)
             {
-                case SituationAccident.ArretOuFeuDefectueux:
-                    liste.Add(getImage("http://i1382.photobucket.com/albums/ah245/PhotobucketMKTG/Print_Shop_Intro.png~original"));
-                    break;
-                case SituationAccident.Carambolage:
-                    // liste.Add(getImage("URL"));
-                    // liste.Add(getImage("URL"));
-                    // liste.Add(getImage("URL"));
-                    break;
-                default:
-                    break;
+                listeBmp.Add(getImage(str));
             }
-            return liste;
+
+            return listeBmp;
         }
 
         private static Bitmap getImage(string url)

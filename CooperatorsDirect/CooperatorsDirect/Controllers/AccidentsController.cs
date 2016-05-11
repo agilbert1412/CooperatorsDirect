@@ -63,9 +63,13 @@ namespace CooperatorsDirect.Controllers
         public string ExportCirconstanceJson(SituationVehicule sit)
         {
             var values = Accident.GetCirconstances(sit);
-            var dict = values.ToDictionary(e => e.ToString(), e => Convert.ToInt32(e));
-            var json = new JavaScriptSerializer().Serialize(dict.Keys);
-            var script = string.Format("{0}={1};", values, json);
+            var dict = new Dictionary<string, List<String>>();
+            foreach(var circ in values)
+            {
+                dict.Add(circ.ToString(), Accident.GetExamplesPath(circ));
+            }
+
+            var json = new JavaScriptSerializer().Serialize(dict);
 
             return json;
         }
