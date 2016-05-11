@@ -295,20 +295,28 @@
                 divTable.className = "table";
                 
                 var divRow;
+                var divRowPicture;
 
                 var jsonData = JSON.parse(data);
 
-                for (var i = 0; i < jsonData.length; i++)
+                //alert(jsonData);
+                var i = 0;
+
+                for (var key in jsonData)
                 {
                     if (i % 2 == 0)
                     {
                         if (i != 0)
                         {
                             divTable.appendChild(divRow);
+                            divTable.appendChild(divRowPicture);
                         }
                         divRow = document.createElement("div");
                         divRow.classList.add("form-group");
                         divRow.classList.add("row");
+                        divRowPicture = document.createElement("div");
+                        divRowPicture.classList.add("form-group");
+                        divRowPicture.classList.add("row");
                     }
                     var input = document.createElement("input");
                     if (i == 0)
@@ -319,18 +327,38 @@
                     input.className = "col-xs-1";
                     input.id = "CirconstancesAccident";
                     input.name = "CirconstancesAccident";
-                    input.value = jsonData[i];
+                    input.value = key;
                     input.type = "radio";
                     divRow.appendChild(input);
                     var label = document.createElement("label");
                     label.className = "col-xs-4";
-                    label.setAttribute("for", jsonData[i]);
-                    label.innerText = jsonData[i];
+                    label.setAttribute("for", key);
+                    label.innerText = key;
                     divRow.appendChild(label);
-                    //alert(jsonData[i]);
+
+                    if (jsonData[key].length > 0)
+                    {
+                        var img = document.createElement("img");
+                        //<img src="smiley.gif" alt="Smiley face" height="42" width="42">
+                        img.src = jsonData[key][0];
+                        img.height = "200";
+                        img.width = "400";
+                        img.alt = "";
+                        img.className = "col-xs-5";
+                        divRowPicture.appendChild(img);
+                    }
+                    else
+                    {
+                        var img = document.createElement("div")
+                        img.className = "col-xs-5";
+                        divRowPicture.appendChild(img);
+                    }
+
+                    i++;
                 }
 
                 divTable.appendChild(divRow);
+                divTable.appendChild(divRowPicture);
                 divPage3.appendChild(divTable);
             });
         }
