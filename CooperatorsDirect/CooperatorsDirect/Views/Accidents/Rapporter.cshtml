@@ -285,116 +285,119 @@
             curEtape = 3;
             etape3.style.display = "block";
             document.getElementById("btnNext").disabled = false;
-            var dropdownSitVeh = document.getElementById("SituationVehicules");
-            $.post("@Url.Action("ExportCirconstanceJson", "Accidents")", { sit: dropdownSitVeh.options[dropdownSitVeh.selectedIndex].value }, function (data) {
-                var divPage3 = document.getElementById("page3");
-                divPage3.innerHTML = "";
-
-                var divTable = document.createElement("div");
-                divTable.id = "tableCirconstances";
-                divTable.className = "table";
-                
-                var divRow;
-                var divRowPicture;
-
-                var jsonData = JSON.parse(data);
-
-                //alert(jsonData);
-                var i = 0;
-
-                for (var key in jsonData)
-                {
-                    if (i % 2 == 0)
-                    {
-                        if (i != 0)
-                        {
-                            divTable.appendChild(divRow);
-                            divTable.appendChild(divRowPicture);
-                        }
-                        divRow = document.createElement("div");
-                        divRow.classList.add("form-group");
-                        divRow.classList.add("row");
-                        divRowPicture = document.createElement("div");
-                        divRowPicture.classList.add("form-group");
-                        divRowPicture.classList.add("row");
-                    }
-                    var input = document.createElement("input");
-                    if (i == 0)
-                    {
-                        input.setAttribute("checked", "checked");
-                        input.setAttribute("data-val-required", "Le champ Circonstances de l'accident est requis.");
-                    }
-                    input.className = "col-xs-1";
-                    input.id = "CirconstancesAccident";
-                    input.name = "CirconstancesAccident";
-                    input.value = key;
-                    input.type = "radio";
-                    divRow.appendChild(input);
-                    var label = document.createElement("label");
-                    label.className = "col-xs-4";
-                    label.setAttribute("for", key);
-                    label.innerText = key;
-                    divRow.appendChild(label);
-
-                    if (jsonData[key].length > 0)
-                    {
-                        var img = document.createElement("img");
-                        //<img src="smiley.gif" alt="Smiley face" height="42" width="42">
-                        img.src = jsonData[key][0];
-                        img.height = "200";
-                        img.width = "400";
-                        img.alt = "";
-                        img.className = "col-xs-5";
-                        divRowPicture.appendChild(img);
-                    }
-                    else
-                    {
-                        var img = document.createElement("div")
-                        img.className = "col-xs-5";
-                        divRowPicture.appendChild(img);
-                    }
-
-                    i++;
-                }
-
-                divTable.appendChild(divRow);
-                divTable.appendChild(divRowPicture);
-                divPage3.appendChild(divTable);
-            });
+            MakePage3(AddTooltip);
         }
-        /*
-        <div id="page3" style="display: block;">
-
-            <div class="table" id="tableCirconstances">
-                    <div class="form-group row">
-                        <input checked="checked" class="col-xs-1" data-val="true" data-val-required="Le champ Circonstances de l'accident est requis." id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="CirculantMemeVoie">
-                        <label class="col-xs-4" for="CirculantMemeVoie">CirculantMemeVoie</label>
-                        <input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="VirageChausseeLaterale">
-                        <label class="col-xs-4" for="VirageChausseeLaterale">VirageChausseeLaterale</label>
-                    </div>
-                    <div class="form-group row">
-                        <input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="VehiculePrenantStationnement"><label class="col-xs-4" for="VehiculePrenantStationnement">VehiculePrenantStationnement</label>
-                        <input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="VehiculeQuittantStationnement"><label class="col-xs-4" for="VehiculeQuittantStationnement">VehiculeQuittantStationnement</label></div><div class="form-group row"><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="VehiculeEnStationnement"><label class="col-xs-4" for="VehiculeEnStationnement">VehiculeEnStationnement</label><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="VehiculeEnStationnementIllegal">
-                        <label class="col-xs-4" for="VehiculeEnStationnementIllegal">VehiculeEnStationnementIllegal</label></div><div class="form-group row">
-                        <input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="CollisionLaterale"><label class="col-xs-4" for="CollisionLaterale">CollisionLaterale</label><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="ChangementVoie"><label class="col-xs-4" for="ChangementVoie">ChangementVoie</label></div><div class="form-group row"><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="DepassementChausseeLaterale"><label class="col-xs-4" for="DepassementChausseeLaterale">DepassementChausseeLaterale</label>
-                        <input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="DepassementChausseeLateraleIntersection"><label class="col-xs-4" for="DepassementChausseeLateraleIntersection">DepassementChausseeLateraleIntersection</label></div><div class="form-group row"><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="VehiculeChevauchantAxeMediant"><label class="col-xs-4" for="VehiculeChevauchantAxeMediant">VehiculeChevauchantAxeMediant</label><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="VehiculesPositionIndeterminee"><label class="col-xs-4" for="VehiculesPositionIndeterminee">VehiculesPositionIndeterminee</label></div><div class="form-group row"><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="VehiculeChevauchantLigneContinue"><label class="col-xs-4" for="VehiculeChevauchantLigneContinue">VehiculeChevauchantLigneContinue</label><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="PrioriteADroite"><label class="col-xs-4" for="PrioriteADroite">PrioriteADroite</label></div><div class="form-group row">
-                        <input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="PrioriteDePassage"><label class="col-xs-4" for="PrioriteDePassage">PrioriteDePassage</label><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="ArretOuFeuDefectueux"><label class="col-xs-4" for="ArretOuFeuDefectueux">ArretOuFeuDefectueux</label></div><div class="form-group row"><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="VehiculeQuittantChausseeLaterale"><label class="col-xs-4" for="VehiculeQuittantChausseeLaterale">VehiculeQuittantChausseeLaterale</label>
-                        <input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="NonRespectSignalisation"><label class="col-xs-4" for="NonRespectSignalisation">NonRespectSignalisation</label>
-                        </div>
-                        <div class="form-group row"><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="VirageSurFlecheVerte">
-                        <label class="col-xs-4" for="VirageSurFlecheVerte">VirageSurFlecheVerte</label><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="VirageADroiteSurFeuRouge"><label class="col-xs-4" for="VirageADroiteSurFeuRouge">VirageADroiteSurFeuRouge</label></div>
-                    <div class="form-group row"><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="MarcheArriereDemiTour"><label class="col-xs-4" for="MarcheArriereDemiTour">MarcheArriereDemiTour</label><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="OuvertureDunePortiere"><label class="col-xs-4" for="OuvertureDunePortiere">OuvertureDunePortiere</label></div><div class="form-group row"><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="CollisionEnChaine"><label class="col-xs-4" for="CollisionEnChaine">CollisionEnChaine</label><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="Carambolage"><label class="col-xs-4" for="Carambolage">Carambolage</label></div><div class="form-group row"><input class="col-xs-1" id="CirconstancesAccident" name="CirconstancesAccident" type="radio" value="CollisionParcStationnementSansSignalisation"><label class="col-xs-4" for="CollisionParcStationnementSansSignalisation">CollisionParcStationnementSansSignalisation</label>
-                    </div>
-
-            </div>
-
-        </div>
-        */
         if (num === 4) {
             curEtape = 4;
             etape4.style.display = "block";
             document.getElementById("btnNext").disabled = true;
         }
+    }
+
+    function MakePage3(callback)
+    {
+        var dropdownSitVeh = document.getElementById("SituationVehicules");
+        $.post("@Url.Action("ExportCirconstanceJson", "Accidents")", { sit: dropdownSitVeh.options[dropdownSitVeh.selectedIndex].value }, function (data) {
+        var divPage3 = document.getElementById("page3");
+        divPage3.innerHTML = "";
+
+        var divTable = document.createElement("div");
+        divTable.id = "tableCirconstances";
+        divTable.className = "table";
+                
+        var divRow;
+        var divRowPicture;
+
+        var jsonData = JSON.parse(data);
+
+            //alert(jsonData);
+        var i = 0;
+
+        for (var key in jsonData)
+        {
+            if (i % 2 == 0)
+            {
+                if (i != 0)
+                {
+                    divTable.appendChild(divRow);
+                    divTable.appendChild(divRowPicture);
+                }
+                divRow = document.createElement("div");
+                divRow.classList.add("form-group");
+                divRow.classList.add("row");
+                divRowPicture = document.createElement("div");
+                divRowPicture.classList.add("form-group");
+                divRowPicture.classList.add("row");
+            }
+            var input = document.createElement("input");
+            if (i == 0)
+            {
+                input.setAttribute("checked", "checked");
+                input.setAttribute("data-val-required", "Le champ Circonstances de l'accident est requis.");
+            }
+            input.classList.add("col-xs-1");
+            input.classList.add("simple-tooltip");
+            input.classList.add("simple-tooltip-" + key);
+            input.id = "CirconstancesAccident";
+            input.name = "CirconstancesAccident";
+            input.value = key;
+            input.type = "radio";
+            divRow.appendChild(input);
+
+            var label = document.createElement("label");
+            label.classList.add("col-xs-4");
+            label.classList.add("simple-tooltip");
+            label.classList.add("simple-tooltip-" + key);
+            label.setAttribute("for", key);
+            label.innerText = key;
+            divRow.appendChild(label);
+
+            if (jsonData[key].length > 0)
+            {
+                var img = document.createElement("img");
+                //<img src="smiley.gif" alt="Smiley face" height="42" width="42">
+                img.src = jsonData[key][0];
+                img.height = "200";
+                img.width = "400";
+                img.alt = "";
+                img.classList.add("col-xs-5");
+                img.classList.add("simple-tooltip");
+                img.classList.add("simple-tooltip-" + key);
+
+                divRowPicture.appendChild(img);
+            }
+            else
+            {
+                var img = document.createElement("div")
+                img.classList.add("col-xs-5");
+                img.classList.add("simple-tooltip");
+                img.classList.add("simple-tooltip-" + key);
+                divRowPicture.appendChild(img);
+            }
+
+            i++;
+        }
+
+        divTable.appendChild(divRow);
+        divTable.appendChild(divRowPicture);
+        divPage3.appendChild(divTable);
+
+        //tooltips = $(master).find('.simple-tooltip');
+        //for (var key in jsonData) {
+        //    callback(key);
+        //}
+    });
+    }
+
+    function AddTooltip(key)
+    {
+        var found = tooltips.find('.simple-tooltip-' + key);
+        found.simpletip({
+            content: tooltipContents[key],
+            position: 'top',
+            hideEffect: 'slide',
+            offset: [-250, 50]
+        });
     }
 
     function Next()
