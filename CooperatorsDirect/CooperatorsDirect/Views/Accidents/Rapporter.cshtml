@@ -349,14 +349,14 @@
             label.classList.add("simple-tooltip");
             label.classList.add("simple-tooltip-" + key);
             label.setAttribute("for", key);
-            label.innerText = key;
+            label.innerText = jsonData[key][0];
             divRow.appendChild(label);
 
-            if (jsonData[key].length > 0)
+            if (jsonData[key].length > 1)
             {
                 var img = document.createElement("img");
                 //<img src="smiley.gif" alt="Smiley face" height="42" width="42">
-                img.src = jsonData[key][0];
+                img.src = jsonData[key][1];
                 img.height = "200";
                 img.width = "400";
                 img.alt = "";
