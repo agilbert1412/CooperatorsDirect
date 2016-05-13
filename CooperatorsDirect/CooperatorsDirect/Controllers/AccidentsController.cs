@@ -10,6 +10,8 @@ using CooperatorsDirect.DAL;
 using CooperatorsDirect.Models;
 using CooperatorsDirect.Security;
 using System.Web.Script.Serialization;
+using System.Reflection;
+using System.ComponentModel.DataAnnotations;
 
 namespace CooperatorsDirect.Controllers
 {
@@ -67,11 +69,31 @@ namespace CooperatorsDirect.Controllers
             foreach(var circ in values)
             {
                 dict.Add(circ.ToString(), Accident.GetExamplesPath(circ));
+                dict[circ.ToString()].Insert(0, GetDisplayName(circ));
             }
 
             var json = new JavaScriptSerializer().Serialize(dict);
 
             return json;
+        }
+
+
+
+        public static string GetDisplayName(Enum value)
+        {
+            Type enumType = value.GetType();
+            var enumValue = Enum.GetName(enumType, value);
+            MemberInfo member = enumType.GetMember(enumValue)[0];
+
+            var attrs = member.GetCustomAttributes(typeof(DisplayAttribute), false);
+            var outString = ((DisplayAttribute)attrs[0]).Name;
+
+            if (((DisplayAttribute)attrs[0]).ResourceType != null)
+            {
+                outString = ((DisplayAttribute)attrs[0]).GetName();
+            }
+
+            return outString;
         }
 
         // POST: Accidents/Create
