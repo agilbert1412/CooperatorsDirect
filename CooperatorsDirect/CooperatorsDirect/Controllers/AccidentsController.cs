@@ -12,6 +12,7 @@ using CooperatorsDirect.Security;
 using System.Web.Script.Serialization;
 using System.Reflection;
 using System.ComponentModel.DataAnnotations;
+using PagedList;
 
 namespace CooperatorsDirect.Controllers
 {
@@ -21,14 +22,72 @@ namespace CooperatorsDirect.Controllers
 
         // GET: Accidents
         [CustomAuthorize(Roles.admin, Roles.client, Roles.employe, Roles.reparateur)]
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page, int? pageSize)
         {
             var listeAccidents = db.Accidents.ToList();
             if (SessionPersiter.User.Role == Roles.client)
             {
                 listeAccidents = listeAccidents.Where(a => a.UserID == SessionPersiter.User.UserID).ToList();
             }
-            return View(db.Accidents.ToList());
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.DateRapportSortParam = String.IsNullOrEmpty(sortOrder) ? "daterapport_desc" : "daterapport_asc";
+            ViewBag.DateRapportSortParam = sortOrder == "daterapport_asc" ? "daterapport_desc" : "daterapport_asc";
+            ViewBag.DateAccidentSortParam = sortOrder == "dateaccident_asc" ? "dateaccident_desc" : "dateaccident_asc";
+            ViewBag.PositionSortParam = sortOrder == "position_asc" ? "position_desc" : "position_asc";
+            ViewBag.CirconstancesSortParam = sortOrder == "circonstances_asc" ? "circonstances_desc" : "circonstances_asc";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                if (currentFilter == null)
+                    currentFilter = "";
+                searchString = currentFilter.ToLower();
+            }
+            ViewBag.CurrentFilter = searchString;
+
+            listeAccidents = listeAccidents.Where(a => a.DateAccidentEnregistre.ToString().ToLower().Contains(searchString) ||
+                                                        a.DateAccidentProduit.ToString().ToLower().Contains(searchString) ||
+                                                        a.Localisation.ToLower().Contains(searchString) |
+                                                        GetDisplayName(a.CirconstancesAccident).ToLower().Contains(searchString)).ToList();
+
+            switch (sortOrder)
+            {
+                case "daterapport_asc":
+                    listeAccidents = listeAccidents.OrderBy(a => a.DateAccidentEnregistre).ToList();
+                    break;
+                case "dateaccident_asc":
+                    listeAccidents = listeAccidents.OrderBy(a => a.DateAccidentProduit).ToList();
+                    break;
+                case "position_asc":
+                    listeAccidents = listeAccidents.OrderBy(a => a.Localisation).ToList();
+                    break;
+                case "circonstances_asc":
+                    listeAccidents = listeAccidents.OrderBy(a => a.CirconstancesAccident).ToList();
+                    break;
+                case "daterapport_desc":
+                    listeAccidents = listeAccidents.OrderByDescending(a => a.DateAccidentEnregistre).ToList();
+                    break;
+                case "dateaccident_desc":
+                    listeAccidents = listeAccidents.OrderByDescending(a => a.DateAccidentProduit).ToList();
+                    break;
+                case "position_desc":
+                    listeAccidents = listeAccidents.OrderByDescending(a => a.Localisation).ToList();
+                    break;
+                case "circonstances_desc":
+                    listeAccidents = listeAccidents.OrderByDescending(a => a.CirconstancesAccident).ToList();
+                    break;
+                default:
+                    listeAccidents = listeAccidents.OrderBy(a => a.DateAccidentEnregistre).OrderBy(a => a.DateAccidentProduit).ToList();
+                    break;
+            }
+            int size = (pageSize ?? 5);
+            ViewBag.CurrentSize = size;
+            int pageNumber = (page ?? 1);
+            return View(listeAccidents.ToPagedList(pageNumber, size));
         }
 
         // GET: Accidents/Details/5
@@ -84,8 +143,6 @@ namespace CooperatorsDirect.Controllers
 
             return json;
         }
-
-
 
         public static string GetDisplayName(Enum value)
         {
