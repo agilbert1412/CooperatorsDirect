@@ -249,7 +249,6 @@
     <Content Include="Views\User\List.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\Accidents\Create.cshtml" />
-    <Content Include="Views\Accidents\Delete.cshtml" />
     <Content Include="Views\Accidents\Details.cshtml" />
     <Content Include="Views\Accidents\Edit.cshtml" />
     <Content Include="Views\Accidents\Index.cshtml" />

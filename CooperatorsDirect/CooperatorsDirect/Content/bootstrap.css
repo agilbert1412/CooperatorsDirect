@@ -611,15 +611,17 @@ dd {
 @media (min-width: 768px) {
   .dl-horizontal dt {
     float: left;
-    width: 160px;
+    width: 320px;
     overflow: hidden;
     clear: left;
     text-align: right;
     text-overflow: ellipsis;
     white-space: nowrap;
+    margin-bottom: 5px;
   }
   .dl-horizontal dd {
-    margin-left: 180px;
+    margin-left: 340px;
+    margin-bottom: 5px;
   }
   .dl-horizontal dd:before,
   .dl-horizontal dd:after {

@@ -12,6 +12,15 @@ namespace CooperatorsDirect.Models
     {
         public int AccidentID { get; set; }
 
+        [Display(Name = "Identifiant de l'utilisateur")]
+        public int UserID { get; set; }
+
+        [Display(Name = "Prénom de l'utilisateur")]
+        public string UserFirstName { get; set; }
+
+        [Display(Name = "Nom de l'utilisateur")]
+        public string UserLastName { get; set; }
+
         [Display(Name = "Date du rapport d'accident")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

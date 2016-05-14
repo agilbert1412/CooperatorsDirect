@@ -354,17 +354,44 @@
 
             if (jsonData[key].length > 1)
             {
+                
                 var img = document.createElement("img");
                 //<img src="smiley.gif" alt="Smiley face" height="42" width="42">
                 img.src = jsonData[key][1];
-                img.height = "200";
-                img.width = "400";
+                img.height = "150";
+                img.width = "200";
                 img.alt = "";
-                img.classList.add("col-xs-5");
+                img.classList.add("col-xs-2");
                 img.classList.add("simple-tooltip");
                 img.classList.add("simple-tooltip-" + key);
 
                 divRowPicture.appendChild(img);
+                if (jsonData[key].length > 2) {
+                    var img2 = document.createElement("img");
+                    //<img src="smiley.gif" alt="Smiley face" height="42" width="42">
+                    img2.src = jsonData[key][2];
+                    img2.height = "150";
+                    img2.width = "200";
+                    img2.alt = "";
+                    img2.classList.add("col-xs-2");
+                    img2.classList.add("simple-tooltip");
+                    img2.classList.add("simple-tooltip-" + key);
+
+                    divRowPicture.appendChild(img2);
+                }
+                else
+                {
+                    var divpad2 = document.createElement("div")
+                    divpad2.classList.add("col-xs-2");
+                    divpad2.classList.add("simple-tooltip");
+                    divpad2.classList.add("simple-tooltip-" + key);
+                    divRowPicture.appendChild(divpad2);
+                }
+                var divpad = document.createElement("div")
+                divpad.classList.add("col-xs-1");
+                divpad.classList.add("simple-tooltip");
+                divpad.classList.add("simple-tooltip-" + key);
+                divRowPicture.appendChild(divpad);
             }
             else
             {

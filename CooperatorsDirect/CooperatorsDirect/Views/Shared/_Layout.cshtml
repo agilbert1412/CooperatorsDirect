@@ -41,13 +41,15 @@
                         {
                             <li>@Html.ActionLink("Utilisateurs", "List", "User")</li>
                         }
-                        @if (SessionPersiter.User.Role == CooperatorsDirect.Models.Roles.employe)
+                        @if (SessionPersiter.User.Role == CooperatorsDirect.Models.Roles.employe || SessionPersiter.User.Role == CooperatorsDirect.Models.Roles.employe)
                         {
                             <li>@Html.ActionLink("Clients", "List", "User")</li>
+                            <li>@Html.ActionLink("Rapports d'accidents", "Index", "Accidents")</li>
                         }
                         @if (SessionPersiter.User.Role == CooperatorsDirect.Models.Roles.client)
                         {
                             <li>@Html.ActionLink("Rapporter un accident", "Rapporter", "Accidents")</li>
+                            <li>@Html.ActionLink("Mes rapports", "Index", "Accidents")</li>
                         }
                     </ul>
                     string message = "Bonjour " + SessionPersiter.User.Prenom + "!";

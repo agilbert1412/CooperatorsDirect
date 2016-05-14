@@ -23,6 +23,11 @@ namespace CooperatorsDirect.Controllers
         [CustomAuthorize(Roles.admin, Roles.client, Roles.employe, Roles.reparateur)]
         public ActionResult Index()
         {
+            var listeAccidents = db.Accidents.ToList();
+            if (SessionPersiter.User.Role == Roles.client)
+            {
+                listeAccidents = listeAccidents.Where(a => a.UserID == SessionPersiter.User.UserID).ToList();
+            }
             return View(db.Accidents.ToList());
         }
 
@@ -57,6 +62,9 @@ namespace CooperatorsDirect.Controllers
             {
                 DateAccidentEnregistre = DateTime.Now,
                 DateAccidentProduit = DateTime.Now,
+                UserID = SessionPersiter.User.UserID,
+                UserFirstName = SessionPersiter.User.Prenom,
+                UserLastName = SessionPersiter.User.Nom
             };
             return View(a);
         }
@@ -103,6 +111,9 @@ namespace CooperatorsDirect.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "AccidentID,DateAccidentEnregistre,DateAccidentProduit,Localisation,RaisonDeplacement,Blessures,Temoins,InformationsAutreVoiture,DetailsSupplementaires,AuMoinsDeuxVehicules,ProduitAuQuebec,ProprietairesIdentifies,ProprietairesDifferents,ConducteurHeurtePropreVehicule,Details,SituationVehicules,CirconstancesAccident,NumeroVehicule")] Accident accident)
         {
+            accident.UserID = SessionPersiter.User.UserID;
+            accident.UserFirstName = SessionPersiter.User.Prenom;
+            accident.UserLastName = SessionPersiter.User.Nom;
             if (ModelState.IsValid)
             {
                 db.Accidents.Add(accident);
@@ -120,6 +131,9 @@ namespace CooperatorsDirect.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Rapporter([Bind(Include = "AccidentID,DateAccidentEnregistre,DateAccidentProduit,Localisation,RaisonDeplacement,Blessures,Temoins,InformationsAutreVoiture,DetailsSupplementaires,AuMoinsDeuxVehicules,ProduitAuQuebec,ProprietairesIdentifies,ProprietairesDifferents,ConducteurHeurtePropreVehicule,Details,SituationVehicules,CirconstancesAccident,NumeroVehicule")] Accident accident)
         {
+            accident.UserID = SessionPersiter.User.UserID;
+            accident.UserFirstName = SessionPersiter.User.Prenom;
+            accident.UserLastName = SessionPersiter.User.Nom;
             if (ModelState.IsValid)
             {
                 db.Accidents.Add(accident);
