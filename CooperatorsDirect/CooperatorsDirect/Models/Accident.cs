@@ -166,16 +166,76 @@ namespace CooperatorsDirect.Models
             switch (sit)
             {
                 case SituationAccident.ArretOuFeuDefectueux:
-                    liste.Add("http://i1382.photobucket.com/albums/ah245/PhotobucketMKTG/Print_Shop_Intro.png~original");
+                    liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/ArretOuFeuDefectueux1_zpsxcfl99rm.jpg");
                     break;
-                case SituationAccident.Carambolage:
-                    // liste.Add(getImage("URL"));
-                    // liste.Add(getImage("URL"));
-                    // liste.Add(getImage("URL"));
+                case SituationAccident.ChangementVoie:
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/ChangementVoie1_zps7x1dzf9s.jpg");
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/ChangementVoie2_zpshpvfvv1a.jpg");
+                     liste.Add("http://s1077.photobucket.com/user/chose12345/media/ChangementVoie3_zpslelzxcgu.jpg.html?sort=3&o=40");
+                    break;
+                case SituationAccident.CirculantMemeVoie:
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/CirculantMemeVoie1_zpsxmmzhcij.jpg");
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/CirculantMemeVoie2_zps0xksjbdh.jpg");
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/CirculantMemeVoie3_zpsx50ydnda.jpg");
+                    break;
+                case SituationAccident.CollisionLaterale:
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/CollisionLaterale1_zpsuj0hbxzg.jpg");
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/CollisionLaterale3_zpsf0jchkhf.jpg");
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/CollisionLaterale2_zpsv17ngbze.jpg");
+                    break;
+                case SituationAccident.CollisionEnChaine:
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/CollisionEnChaine1_zpsdzy6ga2t.jpg");
+                    break;
+                case SituationAccident.DepassementChausseeLateraleIntersection:
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/DepassementChausseeLateraleIntersection2_zpszeo8fcnf.jpg");
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/DepassementChausseeLateraleIntersection1_zpsirggsylm.jpg");
+                    break; 
+                case SituationAccident.DepassementChausseeLaterale:
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/DepassementChausseeLaterale_zpsosuqug9k.jpg");
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/DepassementChausseeLaterale2_zpsp6lrqw9x.jpg");
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/DepassementChausseeLaterale3_zpswkj68lcu.jpg");
                     break;
                 case SituationAccident.PrioriteADroite:
-                    liste.Add("http://i1382.photobucket.com/albums/ah245/PhotobucketMKTG/Print_Shop_Intro.png~original");
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/PrioriteADroite2_zpssenfyy6h.jpg");
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/PrioriteADroite3_zps9kndzutn.jpg"); 
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/PrioriteADroite1_zpscp5hnyjs.jpg");
                     break;
+                case SituationAccident.PrioriteDePassage:
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/PrioriteDePassage1_zpsdsuvwp1h.jpg");
+                    break;
+                case SituationAccident.VehiculeChevauchantAxeMediant:
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/VehiculeChevauchantAxeMediant2_zpsuue9g8wj.jpg"); 
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/VehiculeChevauchantAxeMediant1_zpsicqsdjn2.jpg");
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/VehiculeChevauchantAxeMediant3_zps0ggfx8hf.jpg");
+                    break;
+                case SituationAccident.VehiculeChevauchantLigneContinue:
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/VehiculeChevauchantLigneContinue1_zpsj0tufsiv.jpg");
+                    //liste.Add("");
+                    break;
+                case SituationAccident.VehiculePrenantStationnement:
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/VehiculePrenantStationnement2_zpsd3kaguwy.jpg");
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/VehiculePrenantStationnement1_zpshauvlafq.jpg");
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/VehiculePrenantStationnement3_zps2i3r84qm.jpg"); 
+                    break;
+               case SituationAccident.VehiculeQuittantStationnement:
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/VehiculeQuittantStationnement1_zpshbaavldo.jpg");
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/VehiculeQuittantStationnement3_zps2irv1stx.jpg");
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/VehiculeQuittantStationnement2_zpsmpewn9ol.jpg");
+                    break;
+                case SituationAccident.VehiculeQuittantChausseeLaterale:
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/VehiculeQuittantChausseeLaterale1_zpsgey0t0ty.jpg");
+                     liste.Add("");
+                    break;
+                case SituationAccident.VehiculesPositionIndeterminee:
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/VehiculesPositionIndeterminee2_zpsuabxptly.jpg");
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/VehiculesPositionIndeterminee3_zpsrzu6j6ks.jpg");
+                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/VehiculesPositionIndeterminee1_zpsdlxp8tha.jpg");
+                    break;
+              //  case SituationAccident.
+             //        liste.Add("");
+               //      liste.Add("");
+                 //    liste.Add("");
+                  //  break;
                 default:
                     break;
             }
