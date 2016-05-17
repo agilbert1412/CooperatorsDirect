@@ -147,9 +147,40 @@
             @Html.DisplayFor(model => model.NumeroVehicule)
         </dd>
 
+        @if (Model.Comments != null && Model.Comments.Count() > 0)
+        {
+            <dt>
+                Commentaires
+            </dt>
+
+            foreach (var comm in Model.Comments)
+            {
+                <dd>
+                    <strong>@Html.DisplayTextFor(m => comm.utilisateurName) @Html.DisplayTextFor(m => comm.utilisateurSurname)</strong><br />
+                    <strong>@Html.DisplayTextFor(m => comm.DateCommentaire)</strong><br />
+                    @Html.DisplayTextFor(m => comm.Text)<br /><br />
+                </dd>
+            }
+        }
+
     </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group hidden-print">
+            @Html.LabelFor(model => model.newComment.Text, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.newComment.Text, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.newComment.Text, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group hidden-print">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Ajouter commentaire" class="btn btn-default" />
+            </div>
+        </div>
+    }
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.AccidentID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Retour à la Liste", "Index")
 </p>

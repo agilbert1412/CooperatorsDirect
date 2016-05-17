@@ -10,7 +10,7 @@ namespace CooperatorsDirect.Models
 {
     public class Accident
     {
-        public int AccidentID { get; set; }
+        public int ID { get; set; }
 
         [Display(Name = "Identifiant de l'utilisateur")]
         public int UserID { get; set; }
@@ -73,18 +73,11 @@ namespace CooperatorsDirect.Models
         [Display(Name = "Détails pertinents")]
         public string Details { get; set; }
 
-        private List<Message> _messages;
-        public List<Message> Messages
-        {
-            get
-            {
-                return _messages;
-            }
-            set
-            {
-                _messages = value.OrderByDescending(m => m.SentTime).ToList();
-            }
-        }
+        [Display(Name = "Commentaires")]
+        public List<Commentaire> Comments { get; set; }
+
+        [Display(Name = "Ajouter un commentaire")]
+        public Commentaire newComment { get; set; }
 
         [Display(Name = "Situation des véhicules impliqués")]
         public SituationVehicule SituationVehicules { get; set; }
@@ -102,6 +95,7 @@ namespace CooperatorsDirect.Models
             ProprietairesIdentifies = true;
             ProprietairesDifferents = true;
             ConducteurHeurtePropreVehicule = false;
+            Comments = new List<Commentaire>();
         }
 
         public static List<SituationAccident> GetCirconstances(SituationVehicule sit)
@@ -283,6 +277,13 @@ namespace CooperatorsDirect.Models
         {
             throw new NotImplementedException("Retourne le pourcentage de responsabilité des membres, en ordre.");
             return new double[2]{ 1, 0 };
+        }
+
+        public virtual bool isValid()
+        {
+            if (UserID <= 0)
+                return false;
+            return true;
         }
     }
 

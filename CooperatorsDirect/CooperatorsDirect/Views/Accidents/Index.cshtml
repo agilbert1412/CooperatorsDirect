@@ -1,50 +1,68 @@
-﻿@model IEnumerable<CooperatorsDirect.Models.Accident>
+﻿@model PagedList.IPagedList<CooperatorsDirect.Models.Accident>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Rapports d'accident</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
+@using (Html.BeginForm("Index", "Accidents", FormMethod.Get))
+{
+    <div class="row bottom-buffer-30 top-buffer-20">
+        <div class="col-xs-6">
+            <div class="col-xs-6">
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @placeholder = "Recherche", @class = "form-control" })
+            </div>
+            <div class="col-xs-3">
+                <input type="submit" value="Rechercher" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.DateAccidentEnregistre)
+            @Html.ActionLink("Date du rapport", "Index", new { sortOrder = ViewBag.DateRapportSortParam, currentFilter = ViewBag.CurrentFilter, pageSize = ViewBag.CurrentSize })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DateAccidentProduit)
+            @Html.ActionLink("Date de l'accident", "Index", new { sortOrder = ViewBag.DateAccidentSortParam, currentFilter = ViewBag.CurrentFilter, pageSize = ViewBag.CurrentSize })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Localisation)
+            @Html.ActionLink("Position", "Index", new { sortOrder = ViewBag.PositionSortParam, currentFilter = ViewBag.CurrentFilter, pageSize = ViewBag.CurrentSize })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CirconstancesAccident)
+            @Html.ActionLink("Circonstances de l'accident", "Index", new { sortOrder = ViewBag.CirconstancesSortParam, currentFilter = ViewBag.CurrentFilter, pageSize = ViewBag.CurrentSize })
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateAccidentEnregistre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateAccidentProduit)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Localisation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CirconstancesAccident)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.AccidentID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateAccidentEnregistre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateAccidentProduit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Localisation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CirconstancesAccident)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+<p>Éléments par page: @Html.ActionLink("5", "Index", new { sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, pageSize = 5 }) | @Html.ActionLink("25", "Index", new { sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, pageSize = 25 }) | @Html.ActionLink("200", "Index", new { sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, pageSize = 200 })</p>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, pageSize = ViewBag.CurrentSize }))

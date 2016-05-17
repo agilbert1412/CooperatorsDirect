@@ -40,11 +40,11 @@
                         @if (SessionPersiter.User.Role == CooperatorsDirect.Models.Roles.admin)
                         {
                             <li>@Html.ActionLink("Utilisateurs", "List", "User")</li>
+                            <li>@Html.ActionLink("Rapports d'accidents", "Index", "Accidents")</li>
                         }
-                        @if (SessionPersiter.User.Role == CooperatorsDirect.Models.Roles.employe || SessionPersiter.User.Role == CooperatorsDirect.Models.Roles.employe)
+                        @if (SessionPersiter.User.Role == CooperatorsDirect.Models.Roles.employe)
                         {
                             <li>@Html.ActionLink("Clients", "List", "User")</li>
-                            <li>@Html.ActionLink("Rapports d'accidents", "Index", "Accidents")</li>
                         }
                         @if (SessionPersiter.User.Role == CooperatorsDirect.Models.Roles.client)
                         {
