@@ -16,11 +16,11 @@ namespace CooperatorsDirect.DAL
         }
         
         public DbSet<User> Clients { get; set; }
-        public DbSet<Message> Messages { get; set; }
         public DbSet<Accident> Accidents { get; set; }
         public DbSet<UneImage> Images { get; set; }
         public DbSet<Police> Polices { get; set; }
-        
+        public DbSet<Commentaire> Comments { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -30,6 +30,24 @@ namespace CooperatorsDirect.DAL
         public void Add(User user)
         {
             Clients.Add(user);
+        }
+
+        public List<Accident> GetAllAccidents()
+        {
+            List<Accident> allAccidents = new List<Accident>();
+
+            foreach (Accident r in Accidents)
+            {
+                r.Comments = new List<Commentaire>();
+                allAccidents.Add(r);
+            }
+            
+            foreach (var comm in Comments)
+            {
+                allAccidents.Find(r => r.ID == comm.DemandeID).Comments.Add(comm);
+            }
+
+            return allAccidents;
         }
 
     }

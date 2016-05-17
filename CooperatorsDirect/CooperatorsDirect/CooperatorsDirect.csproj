@@ -181,7 +181,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Accident.cs" />
-    <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\Commentaire.cs" />
     <Compile Include="Models\Police.cs" />
     <Compile Include="Models\UneImage.cs" />
     <Compile Include="Models\User.cs" />

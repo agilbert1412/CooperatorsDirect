@@ -13,12 +13,31 @@ using System.Web.Script.Serialization;
 using System.Reflection;
 using System.ComponentModel.DataAnnotations;
 using PagedList;
+using System.Data.Entity.Migrations;
 
 namespace CooperatorsDirect.Controllers
 {
     public class AccidentsController : Controller
     {
         private CooperatorsContext db = new CooperatorsContext();
+
+        public List<Accident> AllRapports()
+        {
+            var accidents = db.GetAllAccidents();
+            return accidents;
+        }
+
+        public Accident GetRapport(int id)
+        {
+            if (AllRapports().Where(r => r.ID == id).Count() < 1)
+                return null;
+            var role = SessionPersiter.User.Role;
+            var rap = AllRapports().Where(r => r.ID == id).First();
+            if (role == Roles.admin || role == Roles.employe || rap.UserID == SessionPersiter.User.UserID)
+                return rap;
+            else
+                throw new ArgumentException("Accès refusé");
+        }
 
         // GET: Accidents
         [CustomAuthorize(Roles.admin, Roles.client, Roles.employe, Roles.reparateur)]
@@ -98,13 +117,65 @@ namespace CooperatorsDirect.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Accident accident = db.Accidents.Find(id);
+            Accident accident = GetRapport(int.Parse(id.ToString()));
             if (accident == null)
             {
                 return HttpNotFound();
             }
             return View(accident);
         }
+
+        [CustomAuthorize(Roles.admin, Roles.client, Roles.employe, Roles.reparateur)]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Details([Bind(Include = "ID,newComment")] Accident r)
+        {
+            var realR = GetRapport(r.ID);
+            var c = r.newComment;
+            var u = SessionPersiter.User;
+            c.utilisateurID = u.UserID;
+            c.utilisateurName = u.Prenom;
+            c.utilisateurSurname = u.Nom;
+            c.DemandeID = r.ID;
+            db.Comments.Add(c);
+            db.SaveChanges();
+            r.Comments = realR.Comments.ToList();
+            r.ID = realR.ID;
+            r.AuMoinsDeuxVehicules = realR.AuMoinsDeuxVehicules;
+            r.Blessures = realR.Blessures;
+            r.CirconstancesAccident = realR.CirconstancesAccident;
+            r.ConducteurHeurtePropreVehicule = realR.ConducteurHeurtePropreVehicule;
+            r.DateAccidentEnregistre = realR.DateAccidentEnregistre;
+            r.DateAccidentProduit = realR.DateAccidentProduit;
+            r.Details = realR.Details;
+            r.DetailsSupplementaires = realR.DetailsSupplementaires;
+            r.InformationsAutreVoiture = realR.InformationsAutreVoiture;
+            r.Localisation = realR.Localisation;
+            r.NumeroVehicule = realR.NumeroVehicule;
+            r.Photographies = realR.Photographies;
+            r.ProduitAuQuebec = realR.ProduitAuQuebec;
+            r.ProprietairesDifferents = realR.ProprietairesDifferents;
+            r.ProprietairesIdentifies = realR.ProprietairesIdentifies;
+            r.RaisonDeplacement = realR.RaisonDeplacement;
+            r.SituationVehicules = realR.SituationVehicules;
+            r.Temoins = realR.Temoins;
+            r.UserFirstName = realR.UserFirstName;
+            r.UserID = realR.UserID;
+            r.UserLastName = realR.UserLastName;
+            r.newComment = null;
+            if (!string.IsNullOrWhiteSpace(c.Text))
+            {
+                if (r.isValid())
+                {
+                    db.Set<Accident>().AddOrUpdate(r);
+                    //db.Entry(r).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
+            }
+            return RedirectToAction("Details", "Accidents", new { id = r.ID });
+        }
+
 
         // GET: Accidents/Create
         [CustomAuthorize(Roles.admin, Roles.employe, Roles.reparateur)]
@@ -166,7 +237,7 @@ namespace CooperatorsDirect.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AccidentID,DateAccidentEnregistre,DateAccidentProduit,Localisation,RaisonDeplacement,Blessures,Temoins,InformationsAutreVoiture,DetailsSupplementaires,AuMoinsDeuxVehicules,ProduitAuQuebec,ProprietairesIdentifies,ProprietairesDifferents,ConducteurHeurtePropreVehicule,Details,SituationVehicules,CirconstancesAccident,NumeroVehicule")] Accident accident)
+        public ActionResult Create([Bind(Include = "ID,DateAccidentEnregistre,DateAccidentProduit,Localisation,RaisonDeplacement,Blessures,Temoins,InformationsAutreVoiture,DetailsSupplementaires,AuMoinsDeuxVehicules,ProduitAuQuebec,ProprietairesIdentifies,ProprietairesDifferents,ConducteurHeurtePropreVehicule,Details,SituationVehicules,CirconstancesAccident,NumeroVehicule")] Accident accident)
         {
             accident.UserID = SessionPersiter.User.UserID;
             accident.UserFirstName = SessionPersiter.User.Prenom;
@@ -186,7 +257,7 @@ namespace CooperatorsDirect.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Rapporter([Bind(Include = "AccidentID,DateAccidentEnregistre,DateAccidentProduit,Localisation,RaisonDeplacement,Blessures,Temoins,InformationsAutreVoiture,DetailsSupplementaires,AuMoinsDeuxVehicules,ProduitAuQuebec,ProprietairesIdentifies,ProprietairesDifferents,ConducteurHeurtePropreVehicule,Details,SituationVehicules,CirconstancesAccident,NumeroVehicule")] Accident accident)
+        public ActionResult Rapporter([Bind(Include = "ID,DateAccidentEnregistre,DateAccidentProduit,Localisation,RaisonDeplacement,Blessures,Temoins,InformationsAutreVoiture,DetailsSupplementaires,AuMoinsDeuxVehicules,ProduitAuQuebec,ProprietairesIdentifies,ProprietairesDifferents,ConducteurHeurtePropreVehicule,Details,SituationVehicules,CirconstancesAccident,NumeroVehicule")] Accident accident)
         {
             accident.UserID = SessionPersiter.User.UserID;
             accident.UserFirstName = SessionPersiter.User.Prenom;
@@ -221,7 +292,7 @@ namespace CooperatorsDirect.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AccidentID,DateAccidentEnregistre,DateAccidentProduit,Localisation,RaisonDeplacement,Blessures,Temoins,InformationsAutreVoiture,DetailsSupplementaires,AuMoinsDeuxVehicules,ProduitAuQuebec,ProprietairesIdentifies,ProprietairesDifferents,ConducteurHeurtePropreVehicule,Details,SituationVehicules,CirconstancesAccident,NumeroVehicule")] Accident accident)
+        public ActionResult Edit([Bind(Include = "ID,DateAccidentEnregistre,DateAccidentProduit,Localisation,RaisonDeplacement,Blessures,Temoins,InformationsAutreVoiture,DetailsSupplementaires,AuMoinsDeuxVehicules,ProduitAuQuebec,ProprietairesIdentifies,ProprietairesDifferents,ConducteurHeurtePropreVehicule,Details,SituationVehicules,CirconstancesAccident,NumeroVehicule")] Accident accident)
         {
             if (ModelState.IsValid)
             {
