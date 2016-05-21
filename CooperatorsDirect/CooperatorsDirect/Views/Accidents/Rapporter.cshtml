@@ -143,9 +143,9 @@
 
         </div>
 
-        <div id="page4">
+        <div id="page4" class="simple-tooltip">
 
-            <div id="divRaisonDeplacement" class=" form-group simple-tooltip simple-tooltip-RaisonDeplacement">
+            <div id="divRaisonDeplacement" class="form-group simple-tooltip simple-tooltip-RaisonDeplacement">
                 @Html.LabelFor(model => model.RaisonDeplacement, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.RaisonDeplacement, new { htmlAttributes = new { @class = "form-control", style = "max-width: 600px;" } })
@@ -229,6 +229,7 @@
     var master = $('#divFormComplete');
     var content = $(master).find('.content');
     var tooltips = $(master).find('.simple-tooltip');
+    //var t = $(tooltips).find('simple-tooltip-RaisonDeplacement');
 
     var curEtape = 1;
 
