@@ -346,164 +346,302 @@
 
     function ShowEtape(num)
     {
-        document.getElementById("IndicateurEtape").innerHTML = "Étape " + num;
         etape1.style.display = "none";
         etape2.style.display = "none";
         etape3.style.display = "none";
         etape4.style.display = "none";
+        var chkAccidentDeuxVehicules = document.getElementById("AuMoinsDeuxVehicules");
         if (num === 1) {
             curEtape = 1;
             etape1.style.display = "block";
             document.getElementById("btnPrevious").disabled = true;
+            document.getElementById("btnNext").disabled = false;
         }
         if (num === 2) {
-            curEtape = 2;
-            etape2.style.display = "block";
-            document.getElementById("btnPrevious").disabled = false;
+            if (chkAccidentDeuxVehicules.checked)
+            {
+                curEtape = 2;
+                etape2.style.display = "block";
+                document.getElementById("btnNext").disabled = false;
+                document.getElementById("btnPrevious").disabled = false;
+            }
+            else
+            {
+                num = 4;
+            }
         }
         if (num === 3) {
-            curEtape = 3;
-            etape3.style.display = "block";
-            document.getElementById("btnNext").disabled = false;
-            MakePage3(AddTooltip);
+            if (chkAccidentDeuxVehicules.checked) {
+                curEtape = 3;
+                etape3.style.display = "block";
+                document.getElementById("btnNext").disabled = false;
+                document.getElementById("btnPrevious").disabled = false;
+                MakePage3();
+            }
+            else {
+                curEtape = 1;
+                etape1.style.display = "block";
+                document.getElementById("btnPrevious").disabled = true;
+                document.getElementById("btnNext").disabled = false;
+            }
         }
         if (num === 4) {
             curEtape = 4;
             etape4.style.display = "block";
+            document.getElementById("btnPrevious").disabled = false;
             document.getElementById("btnNext").disabled = true;
+            if (chkAccidentDeuxVehicules.checked) {
+                MakePage4();
+            }
         }
+        document.getElementById("IndicateurEtape").innerHTML = "Étape " + curEtape;
     }
 
-    function MakePage3(callback)
+    function MakePage3()
     {
         var dropdownSitVeh = document.getElementById("SituationVehicules");
         $.post("@Url.Action("ExportCirconstanceJson", "Accidents")", { sit: dropdownSitVeh.options[dropdownSitVeh.selectedIndex].value }, function (data) {
-        var divPage3 = document.getElementById("page3");
-        divPage3.innerHTML = "";
+            var divPage3 = document.getElementById("page3");
+            divPage3.innerHTML = "";
 
-        var divTable = document.createElement("div");
-        divTable.id = "tableCirconstances";
-        divTable.className = "table";
+            var divTable = document.createElement("div");
+            divTable.id = "tableCirconstances";
+            divTable.className = "table";
                 
-        var divRow;
-        var divRowPicture;
+            var divRow;
+            var divRowPicture;
 
-        var jsonData = JSON.parse(data);
+            var jsonData = JSON.parse(data);
 
-            //alert(jsonData);
-        var i = 0;
+                //alert(jsonData);
+            var i = 0;
 
-        for (var key in jsonData)
-        {
-            if (i % 2 == 0)
+            for (var key in jsonData)
             {
-                if (i != 0)
+                if (i % 2 == 0)
                 {
-                    divTable.appendChild(divRow);
-                    divTable.appendChild(divRowPicture);
+                    if (i != 0)
+                    {
+                        divTable.appendChild(divRow);
+                        divTable.appendChild(divRowPicture);
+                    }
+                    divRow = document.createElement("div");
+                    divRow.classList.add("form-group");
+                    divRow.classList.add("row");
+                    divRowPicture = document.createElement("div");
+                    divRowPicture.classList.add("form-group");
+                    divRowPicture.classList.add("row");
                 }
-                divRow = document.createElement("div");
-                divRow.classList.add("form-group");
-                divRow.classList.add("row");
-                divRowPicture = document.createElement("div");
-                divRowPicture.classList.add("form-group");
-                divRowPicture.classList.add("row");
-            }
-            var input = document.createElement("input");
-            if (i == 0)
-            {
-                input.setAttribute("checked", "checked");
-                input.setAttribute("data-val-required", "Le champ Circonstances de l'accident est requis.");
-            }
-            input.classList.add("col-xs-1");
-            input.classList.add("simple-tooltip");
-            input.classList.add("simple-tooltip-" + key);
-            input.id = "CirconstancesAccident";
-            input.name = "CirconstancesAccident";
-            input.value = key;
-            input.type = "radio";
-            divRow.appendChild(input);
+                var input = document.createElement("input");
+                if (i == 0)
+                {
+                    input.setAttribute("checked", "checked");
+                    input.setAttribute("data-val-required", "Le champ Circonstances de l'accident est requis.");
+                }
+                input.classList.add("col-xs-1");
+                input.classList.add("simple-tooltip");
+                input.classList.add("simple-tooltip-" + key);
+                input.id = "CirconstancesAccident";
+                input.name = "CirconstancesAccident";
+                input.value = key;
+                input.type = "radio";
+                divRow.appendChild(input);
 
-            var label = document.createElement("label");
-            label.classList.add("col-xs-4");
-            label.classList.add("simple-tooltip");
-            label.classList.add("simple-tooltip-" + key);
-            label.setAttribute("for", key);
-            label.innerText = jsonData[key][0];
-            divRow.appendChild(label);
+                var label = document.createElement("label");
+                label.classList.add("col-xs-4");
+                label.classList.add("simple-tooltip");
+                label.classList.add("simple-tooltip-" + key);
+                label.setAttribute("for", key);
+                label.innerText = jsonData[key][0];
+                divRow.appendChild(label);
 
-            if (jsonData[key].length > 1)
-            {
+                if (jsonData[key].length > 1)
+                {
                 
-                var img = document.createElement("img");
-                //<img src="smiley.gif" alt="Smiley face" height="42" width="42">
-                img.src = jsonData[key][1];
-                img.height = "150";
-                img.width = "200";
-                img.alt = "";
-                img.classList.add("col-xs-2");
-                img.classList.add("simple-tooltip");
-                img.classList.add("simple-tooltip-" + key);
-
-                divRowPicture.appendChild(img);
-                if (jsonData[key].length > 2) {
-                    var img2 = document.createElement("img");
+                    var img = document.createElement("img");
                     //<img src="smiley.gif" alt="Smiley face" height="42" width="42">
-                    img2.src = jsonData[key][2];
-                    img2.height = "150";
-                    img2.width = "200";
-                    img2.alt = "";
-                    img2.classList.add("col-xs-2");
-                    img2.classList.add("simple-tooltip");
-                    img2.classList.add("simple-tooltip-" + key);
+                    img.src = jsonData[key][1];
+                    img.height = "150";
+                    img.width = "200";
+                    img.alt = "";
+                    img.classList.add("simple-tooltip");
+                    img.classList.add("simple-tooltip-" + key);
 
-                    divRowPicture.appendChild(img2);
+                    if (jsonData[key][1].indexOf("Carambolage") == -1 && jsonData[key][1].indexOf("CollisionEnChaine") == -1 && jsonData[key][1].indexOf("PrioriteDePassage") == -1) {
+                        img.classList.add("col-xs-2");
+
+                        divRowPicture.appendChild(img);
+                        if (jsonData[key].length > 2) {
+                            var img2 = document.createElement("img");
+                            //<img src="smiley.gif" alt="Smiley face" height="42" width="42">
+                            img2.src = jsonData[key][2];
+                            img2.height = "150";
+                            img2.width = "200";
+                            img2.alt = "";
+                            img2.classList.add("col-xs-2");
+                            img2.classList.add("simple-tooltip");
+                            img2.classList.add("simple-tooltip-" + key);
+
+                            divRowPicture.appendChild(img2);
+                        }
+                        else {
+                            var divpad2 = document.createElement("div")
+                            divpad2.classList.add("col-xs-2");
+                            divpad2.classList.add("simple-tooltip");
+                            divpad2.classList.add("simple-tooltip-" + key);
+                            divRowPicture.appendChild(divpad2);
+                        }
+                        var divpad = document.createElement("div")
+                        divpad.classList.add("col-xs-1");
+                        divpad.classList.add("simple-tooltip");
+                        divpad.classList.add("simple-tooltip-" + key);
+                        divRowPicture.appendChild(divpad);
+                    }
+                    else
+                    {
+                        img.classList.add("col-xs-5");
+                        divRowPicture.appendChild(img);
+                    }
                 }
                 else
                 {
-                    var divpad2 = document.createElement("div")
-                    divpad2.classList.add("col-xs-2");
-                    divpad2.classList.add("simple-tooltip");
-                    divpad2.classList.add("simple-tooltip-" + key);
-                    divRowPicture.appendChild(divpad2);
+                    var img = document.createElement("div")
+                    img.classList.add("col-xs-5");
+                    img.classList.add("simple-tooltip");
+                    img.classList.add("simple-tooltip-" + key);
+                    divRowPicture.appendChild(img);
                 }
-                var divpad = document.createElement("div")
-                divpad.classList.add("col-xs-1");
-                divpad.classList.add("simple-tooltip");
-                divpad.classList.add("simple-tooltip-" + key);
-                divRowPicture.appendChild(divpad);
-            }
-            else
-            {
-                var img = document.createElement("div")
-                img.classList.add("col-xs-5");
-                img.classList.add("simple-tooltip");
-                img.classList.add("simple-tooltip-" + key);
-                divRowPicture.appendChild(img);
+
+                i++;
             }
 
-            i++;
-        }
-
-        divTable.appendChild(divRow);
-        divTable.appendChild(divRowPicture);
-        divPage3.appendChild(divTable);
-
-        //tooltips = $(master).find('.simple-tooltip');
-        //for (var key in jsonData) {
-        //    callback(key);
-        //}
-    });
+            divTable.appendChild(divRow);
+            divTable.appendChild(divRowPicture);
+            divPage3.appendChild(divTable);
+        });
     }
 
-    function AddTooltip(key)
+    function MakePage4()
     {
-        var found = tooltips.find('.simple-tooltip-' + key);
-        found.simpletip({
-            content: tooltipContents[key],
-            position: 'top',
-            hideEffect: 'slide',
-            offset: [-250, 50]
+        var dropdownSitVeh = document.getElementById("SituationVehicules");
+        $.post("@Url.Action("ExportCirconstanceJson", "Accidents")", { sit: dropdownSitVeh.options[dropdownSitVeh.selectedIndex].value }, function (data) {
+            var divPage4 = document.getElementById("page4");
+            divPage3.innerHTML = "";
+
+            var divTable = document.createElement("div");
+            divTable.id = "tableCirconstances";
+            divTable.className = "table";
+                
+            var divRow;
+            var divRowPicture;
+
+            var jsonData = JSON.parse(data);
+
+            //alert(jsonData);
+            var i = 0;
+
+            for (var key in jsonData)
+            {
+                if (i % 2 == 0)
+                {
+                    if (i != 0)
+                    {
+                        divTable.appendChild(divRow);
+                        divTable.appendChild(divRowPicture);
+                    }
+                    divRow = document.createElement("div");
+                    divRow.classList.add("form-group");
+                    divRow.classList.add("row");
+                    divRowPicture = document.createElement("div");
+                    divRowPicture.classList.add("form-group");
+                    divRowPicture.classList.add("row");
+                }
+                var input = document.createElement("input");
+                if (i == 0)
+                {
+                    input.setAttribute("checked", "checked");
+                    input.setAttribute("data-val-required", "Le champ Circonstances de l'accident est requis.");
+                }
+                input.classList.add("col-xs-1");
+                input.classList.add("simple-tooltip");
+                input.classList.add("simple-tooltip-" + key);
+                input.id = "CirconstancesAccident";
+                input.name = "CirconstancesAccident";
+                input.value = key;
+                input.type = "radio";
+                divRow.appendChild(input);
+
+                var label = document.createElement("label");
+                label.classList.add("col-xs-4");
+                label.classList.add("simple-tooltip");
+                label.classList.add("simple-tooltip-" + key);
+                label.setAttribute("for", key);
+                label.innerText = jsonData[key][0];
+                divRow.appendChild(label);
+
+                if (jsonData[key].length > 1)
+                {
+                
+                    var img = document.createElement("img");
+                    //<img src="smiley.gif" alt="Smiley face" height="42" width="42">
+                    img.src = jsonData[key][1];
+                    img.height = "150";
+                    img.width = "200";
+                    img.alt = "";
+                    img.classList.add("simple-tooltip");
+                    img.classList.add("simple-tooltip-" + key);
+
+                    if (jsonData[key][1].indexOf("Carambolage") == -1 && jsonData[key][1].indexOf("CollisionEnChaine") == -1 && jsonData[key][1].indexOf("PrioriteDePassage") == -1) {
+                        img.classList.add("col-xs-2");
+
+                        divRowPicture.appendChild(img);
+                        if (jsonData[key].length > 2) {
+                            var img2 = document.createElement("img");
+                            //<img src="smiley.gif" alt="Smiley face" height="42" width="42">
+                            img2.src = jsonData[key][2];
+                            img2.height = "150";
+                            img2.width = "200";
+                            img2.alt = "";
+                            img2.classList.add("col-xs-2");
+                            img2.classList.add("simple-tooltip");
+                            img2.classList.add("simple-tooltip-" + key);
+
+                            divRowPicture.appendChild(img2);
+                        }
+                        else {
+                            var divpad2 = document.createElement("div")
+                            divpad2.classList.add("col-xs-2");
+                            divpad2.classList.add("simple-tooltip");
+                            divpad2.classList.add("simple-tooltip-" + key);
+                            divRowPicture.appendChild(divpad2);
+                        }
+                        var divpad = document.createElement("div")
+                        divpad.classList.add("col-xs-1");
+                        divpad.classList.add("simple-tooltip");
+                        divpad.classList.add("simple-tooltip-" + key);
+                        divRowPicture.appendChild(divpad);
+                    }
+                    else
+                    {
+                        img.classList.add("col-xs-5");
+                        divRowPicture.appendChild(img);
+                    }
+                }
+                else
+                {
+                    var img = document.createElement("div")
+                    img.classList.add("col-xs-5");
+                    img.classList.add("simple-tooltip");
+                    img.classList.add("simple-tooltip-" + key);
+                    divRowPicture.appendChild(img);
+                }
+
+                i++;
+            }
+
+            divTable.appendChild(divRow);
+            divTable.appendChild(divRowPicture);
+            divPage3.appendChild(divTable);
         });
     }
 
