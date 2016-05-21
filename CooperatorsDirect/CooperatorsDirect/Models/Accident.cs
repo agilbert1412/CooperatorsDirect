@@ -41,7 +41,7 @@ namespace CooperatorsDirect.Models
             + " sa position dans le véhicule et si la ceinture de sécurité était porté")]
         public string Blessures { get; set; }
 
-        [Display(Name = "Témoins de l'accident")]
+        [Display(Name = "Témoins de l'accident et policiers impliqués")]
         public string Temoins { get; set; }
 
         [Display(Name = "Information sur l'autre véhicule impliqué (nom, adresse, numéro de téléphone, "
@@ -85,7 +85,7 @@ namespace CooperatorsDirect.Models
         [Display(Name = "Circonstances de l'accident")]
         public SituationAccident CirconstancesAccident { get; set; }
 
-        [Display(Name = "Numero de notre véhicule")]
+        [Display(Name = "Quel est la lettre de votre véhicule dans cette image?")]
         public int NumeroVehicule { get; set; }
 
         public Accident()
