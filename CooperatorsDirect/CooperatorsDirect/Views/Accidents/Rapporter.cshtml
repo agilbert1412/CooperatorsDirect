@@ -64,7 +64,7 @@
                 </div>
             </div>
 
-            <div id="divProprietairesIdentifies" class="form-group simple-tooltip simple-tooltip-proprietairesidentifies">
+            <div id="divProprietairesIdentifies" class="form-group simple-tooltip simple-tooltip-ProprietairesIdentifies">
                 @Html.LabelFor(model => model.ProprietairesIdentifies, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <div class="checkbox">
@@ -133,7 +133,7 @@
                 }
             </div>
 
-            <div class="form-group">
+            <div id="divCirconstancesAccident" class="form-group simple-tooltip simple-tooltip-CirconstancesAccident">
                 @Html.LabelFor(model => model.CirconstancesAccident, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EnumDropDownListFor(model => model.CirconstancesAccident, htmlAttributes: new { @class = "form-control" })
@@ -145,34 +145,34 @@
 
         <div id="page4">
 
-            <div class="form-group">
+            <div id="divRaisonDeplacement" class=" form-group simple-tooltip simple-tooltip-RaisonDeplacement">
                 @Html.LabelFor(model => model.RaisonDeplacement, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.RaisonDeplacement, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.RaisonDeplacement, new { htmlAttributes = new { @class = "form-control", style = "max-width: 600px;" } })
                     @Html.ValidationMessageFor(model => model.RaisonDeplacement, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group">
+            <div id="Blessures" class="form-group simple-tooltip simple-tooltip-Blessures">
                 @Html.LabelFor(model => model.Blessures, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Blessures, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Blessures, new { htmlAttributes = new { @class = "form-control", style = "max-width: 600px;" } })
                     @Html.ValidationMessageFor(model => model.Blessures, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group">
+            <div id="Temoins" class="form-group simple-tooltip simple-tooltip-Temoins">
                 @Html.LabelFor(model => model.Temoins, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Temoins, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Temoins, new { htmlAttributes = new { @class = "form-control", style = "max-width: 600px;" } })
                     @Html.ValidationMessageFor(model => model.Temoins, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group">
+            <div id="InformationsAutreVoiture" class="form-group simple-tooltip simple-tooltip-InformationsAutreVoiture">
                 @Html.LabelFor(model => model.InformationsAutreVoiture, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.InformationsAutreVoiture, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.InformationsAutreVoiture, new { htmlAttributes = new { @class = "form-control", style = "max-width: 600px;" } })
                     @Html.ValidationMessageFor(model => model.InformationsAutreVoiture, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -180,7 +180,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.DetailsSupplementaires, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.DetailsSupplementaires, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.DetailsSupplementaires, new { htmlAttributes = new { @class = "form-control", style = "max-width: 600px;" } })
                     @Html.ValidationMessageFor(model => model.DetailsSupplementaires, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -188,7 +188,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Details, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Details, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Details, new { htmlAttributes = new { @class = "form-control", style = "max-width: 600px;" } })
                     @Html.ValidationMessageFor(model => model.Details, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -196,7 +196,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.NumeroVehicule, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.NumeroVehicule, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.NumeroVehicule, new { htmlAttributes = new { @class = "form-control", style = "max-width: 600px;" } })
                     @Html.ValidationMessageFor(model => model.NumeroVehicule, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -239,9 +239,19 @@
 
     var tooltipContents = {
         'AuMoinsDeuxVehicules': "L'accident comporte-t-il au moins 2 véhicules? Dans le cas où il n'y a qu'un véhicule, veuillez décrire le plus précisemment possible le sinistre dans la section pour ajouter des informations puisque tous les cas ne sont pas détaillés.",
-        'ProduitAuQuebec': "",
+        'ProduitAuQuebec': "L'accident s'est produit dans la province de Québec",
         'ProprietairesIdentifies': "Les cas de délis de fuite sont couvert par la protection au Chapitre B de votre contrat ",
-        'ProprietairesDifferents': ""
+        'ProprietairesDifferents': "Le propriétaire des véhicules impliqués sont différents",
+        'ConducteurHeurtePropreVehicule': "",
+        'SituationVehicules': "",
+        'CirconstancesAccident': "",
+        'RaisonDeplacement': "",
+        'Blessures': "",
+        'Temoins': "",
+        'InformationsAutreVoiture':"",
+
+
+    
     };
 
 
@@ -258,6 +268,30 @@
 
         tooltips.find('.simple-tooltip-ProduitAuQuebec').simpletip({
             content: tooltipContents['ProduitAuQuebec'],
+            position: 'top',
+            hideEffect: 'slide',
+            offset: [-250, 50]
+        });
+        tooltips.find('.simple-tooltip-ProprietairesIdentifies').simpletip({
+            content: tooltipContents['ProprietairesIdentifies'],
+            position: 'top',
+            hideEffect: 'slide',
+            offset: [-250, 50]
+        });
+        tooltips.find('.simple-tooltip-ProprietairesDifferents').simpletip({
+            content: tooltipContents['ProprietairesDifferents'],
+            position: 'top',
+            hideEffect: 'slide',
+            offset: [-250, 50]
+        });
+        tooltips.find('.simple-tooltip-ConducteurHeurtePropreVehicule').simpletip({
+            content: tooltipContents['ConducteurHeurtePropreVehicule'],
+            position: 'top',
+            hideEffect: 'slide',
+            offset: [-250, 50]
+        });
+        tooltips.find('.simple-tooltip-SituationVehicules').simpletip({
+            content: tooltipContents['SituationVehicules'],
             position: 'top',
             hideEffect: 'slide',
             offset: [-250, 50]
