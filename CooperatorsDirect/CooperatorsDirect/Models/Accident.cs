@@ -85,7 +85,7 @@ namespace CooperatorsDirect.Models
         [Display(Name = "Circonstances de l'accident")]
         public SituationAccident CirconstancesAccident { get; set; }
 
-        [Display(Name = "Quel est la lettre de votre véhicule dans cet image?")]
+        [Display(Name = "Quel est la lettre de votre véhicule dans cette image?")]
         public int NumeroVehicule { get; set; }
 
         public Accident()
