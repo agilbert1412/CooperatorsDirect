@@ -153,7 +153,7 @@
                 </div>
             </div>
 
-            <div id="Blessures" class="form-group simple-tooltip simple-tooltip-Blessures">
+            <div id="divBlessures" class="form-group simple-tooltip simple-tooltip-Blessures">
                 @Html.LabelFor(model => model.Blessures, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Blessures, new { htmlAttributes = new { @class = "form-control", style = "max-width: 600px;" } })
@@ -161,7 +161,7 @@
                 </div>
             </div>
 
-            <div id="Temoins" class="form-group simple-tooltip simple-tooltip-Temoins">
+            <div id="divTemoins" class="form-group simple-tooltip simple-tooltip-Temoins">
                 @Html.LabelFor(model => model.Temoins, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Temoins, new { htmlAttributes = new { @class = "form-control", style = "max-width: 600px;" } })
@@ -169,7 +169,7 @@
                 </div>
             </div>
 
-            <div id="InformationsAutreVoiture" class="form-group simple-tooltip simple-tooltip-InformationsAutreVoiture">
+            <div id="divInformationsAutreVoiture" class="form-group simple-tooltip simple-tooltip-InformationsAutreVoiture">
                 @Html.LabelFor(model => model.InformationsAutreVoiture, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.InformationsAutreVoiture, new { htmlAttributes = new { @class = "form-control", style = "max-width: 600px;" } })
@@ -177,7 +177,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div id="divDetailsSupplementaires" class="form-group simple-tooltip simple-tooltip-DetailsSupplementaires ">
                 @Html.LabelFor(model => model.DetailsSupplementaires, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.DetailsSupplementaires, new { htmlAttributes = new { @class = "form-control", style = "max-width: 600px;" } })
@@ -185,7 +185,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div id="Details" class="form-group simple-tooltip simple-tooltip-Details ">
                 @Html.LabelFor(model => model.Details, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Details, new { htmlAttributes = new { @class = "form-control", style = "max-width: 600px;" } })
@@ -248,7 +248,10 @@
         'RaisonDeplacement': "",
         'Blessures': "",
         'Temoins': "",
-        'InformationsAutreVoiture':"",
+        'InformationsAutreVoiture': "",
+        'DetailsSupplementaires': "",
+        'Details': "",
+
 
 
     
@@ -292,6 +295,48 @@
         });
         tooltips.find('.simple-tooltip-SituationVehicules').simpletip({
             content: tooltipContents['SituationVehicules'],
+            position: 'top',
+            hideEffect: 'slide',
+            offset: [-250, 50]
+        });
+        tooltips.find('.simple-tooltip-CirconstancesAccident').simpletip({
+            content: tooltipContents['CirconstancesAccident'],
+            position: 'top',
+            hideEffect: 'slide',
+            offset: [-250, 50]
+        });
+        tooltips.find('.simple-tooltip-RaisonDeplacement').simpletip({
+            content: tooltipContents['RaisonDeplacement'],
+            position: 'top',
+            hideEffect: 'slide',
+            offset: [-250, 50]
+        });
+        tooltips.find('.simple-tooltip-Blessures').simpletip({
+            content: tooltipContents['Blessures'],
+            position: 'top',
+            hideEffect: 'slide',
+            offset: [-250, 50]
+        });
+        tooltips.find('.simple-tooltip-Temoins').simpletip({
+            content: tooltipContents['Temoins'],
+            position: 'top',
+            hideEffect: 'slide',
+            offset: [-250, 50]
+        });
+        tooltips.find('.simple-tooltip-InformationsAutreVoiture').simpletip({
+            content: tooltipContents['InformationsAutreVoiture'],
+            position: 'top',
+            hideEffect: 'slide',
+            offset: [-250, 50]
+        });
+        tooltips.find('.simple-tooltip-DetailsSupplementaires').simpletip({
+            content: tooltipContents['DetailsSupplementaires'],
+            position: 'top',
+            hideEffect: 'slide',
+            offset: [-250, 50]
+        });
+        tooltips.find('.simple-tooltip-Details').simpletip({
+            content: tooltipContents['Details'],
             position: 'top',
             hideEffect: 'slide',
             offset: [-250, 50]
