@@ -213,7 +213,6 @@ namespace CooperatorsDirect.Models
                     break;
                 case SituationAccident.VehiculeChevauchantLigneContinue:
                      liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/VehiculeChevauchantLigneContinue1_zpsj0tufsiv.jpg");
-                    //liste.Add("");
                     break;
                 case SituationAccident.VehiculePrenantStationnement:
                      liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/VehiculePrenantStationnement2_zpsd3kaguwy.jpg");
@@ -227,18 +226,18 @@ namespace CooperatorsDirect.Models
                     break;
                 case SituationAccident.VehiculeQuittantChausseeLaterale:
                      liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/VehiculeQuittantChausseeLaterale1_zpsgey0t0ty.jpg");
-                     liste.Add("");
+                     
                     break;
                 case SituationAccident.VehiculesPositionIndeterminee:
                      liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/VehiculesPositionIndeterminee2_zpsuabxptly.jpg");
                      liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/VehiculesPositionIndeterminee3_zpsrzu6j6ks.jpg");
                      liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/VehiculesPositionIndeterminee1_zpsdlxp8tha.jpg");
                     break;
-              //  case SituationAccident.
-             //        liste.Add("");
-               //      liste.Add("");
-                 //    liste.Add("");
-                  //  break;
+                case SituationAccident.VirageChausseeLaterale:
+                    liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/VirageChausseeLaterale2_zpsjvswnzs5.jpg");
+                    liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/VirageChausseeLaterale1_zpsky46fnjz.jpg");
+                    liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/VirageChausseeLaterale3_zpsqcv9nqkj.jpg");
+                    break;
                 default:
                     break;
             }
