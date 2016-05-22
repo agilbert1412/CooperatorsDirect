@@ -215,6 +215,12 @@ namespace CooperatorsDirect.Controllers
             return json;
         }
 
+        [HttpPost]
+        public string ExportImagesJson(SituationAccident sit)
+        {
+            return new JavaScriptSerializer().Serialize(Accident.GetExamplesPath(sit));
+        }
+
         public static string GetDisplayName(Enum value)
         {
             Type enumType = value.GetType();
