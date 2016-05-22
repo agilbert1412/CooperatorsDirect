@@ -65,7 +65,7 @@ namespace LevelUp.Controllers
             }
             else
             {
-                if (SessionPersiter.User.Role != Roles.admin && SessionPersiter.User.UserID != id)
+                if (SessionPersiter.User.Role != Roles.admin && SessionPersiter.User.Role != Roles.employe && SessionPersiter.User.UserID != id)
                 {
                     return RedirectToAction("Index", "Home");
                 }
@@ -107,7 +107,7 @@ namespace LevelUp.Controllers
             {
                 return View("Register");
             }
-            return View("Index");
+            return RedirectToAction("List");
         }
 
         [HttpPost, ActionName("Create")]
@@ -124,7 +124,7 @@ namespace LevelUp.Controllers
             {
                 return View("Create");
             }
-            return View("List");
+            return RedirectToAction("List");
         }
 
 

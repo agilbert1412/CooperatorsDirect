@@ -128,11 +128,17 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SituationVehicules)
+            @{
+                string description1 = CooperatorsDirect.Models.EnumHelper<CooperatorsDirect.Models.SituationVehicule>.GetDisplayValue(Model.SituationVehicules);
+                @Html.DisplayFor(modelItem => description1)
+            }
         </dd>
-
+        
         <dt>
-            @Html.DisplayNameFor(model => model.CirconstancesAccident)
+            @{
+                string description2 = CooperatorsDirect.Models.EnumHelper<CooperatorsDirect.Models.SituationAccident>.GetDisplayValue(Model.CirconstancesAccident);
+                @Html.DisplayFor(modelItem => description2)
+            }
         </dt>
 
         <dd>

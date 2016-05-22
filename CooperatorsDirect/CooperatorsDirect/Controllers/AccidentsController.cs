@@ -221,6 +221,12 @@ namespace CooperatorsDirect.Controllers
             return new JavaScriptSerializer().Serialize(Accident.GetExamplesPath(sit));
         }
 
+        [HttpPost]
+        public string GetDisplayNameJson(Enum value)
+        {
+            return new JavaScriptSerializer().Serialize(GetDisplayName(value));
+        }
+
         public static string GetDisplayName(Enum value)
         {
             Type enumType = value.GetType();

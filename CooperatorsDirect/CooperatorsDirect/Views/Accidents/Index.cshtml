@@ -52,7 +52,10 @@
                 @Html.DisplayFor(modelItem => item.Localisation)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CirconstancesAccident)
+                @{
+                    string description = CooperatorsDirect.Models.EnumHelper<CooperatorsDirect.Models.SituationAccident>.GetDisplayValue(item.CirconstancesAccident);
+                    @Html.DisplayFor(modelItem => description)
+                }
             </td>
             <td>
                 @Html.ActionLink("Details", "Details", new { id = item.ID })

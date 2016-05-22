@@ -182,6 +182,7 @@
     </Compile>
     <Compile Include="Models\Accident.cs" />
     <Compile Include="Models\Commentaire.cs" />
+    <Compile Include="Models\EnumHelper.cs" />
     <Compile Include="Models\Police.cs" />
     <Compile Include="Models\UneImage.cs" />
     <Compile Include="Models\User.cs" />
@@ -265,6 +266,7 @@
     <Content Include="Views\Accidents\Index.cshtml" />
     <Content Include="Views\Accidents\Rapporter.cshtml" />
     <Content Include="Views\User\Police.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
