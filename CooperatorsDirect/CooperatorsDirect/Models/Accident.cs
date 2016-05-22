@@ -239,6 +239,9 @@ namespace CooperatorsDirect.Models
                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/VirageChausseeLaterale1_zpsky46fnjz.jpg");
                     liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/VirageChausseeLaterale3_zpsqcv9nqkj.jpg");
                     break;
+                case SituationAccident.Carambolage:
+                    liste.Add("http://i1077.photobucket.com/albums/w463/chose12345/Carambolage_zpsekz7rklr.jpg");
+                    break;
                 default:
                     break;
             }
