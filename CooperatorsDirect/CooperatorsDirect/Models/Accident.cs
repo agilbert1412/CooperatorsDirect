@@ -137,6 +137,7 @@ namespace CooperatorsDirect.Models
                     lst.Add(SituationAccident.CollisionEnChaine);
                     lst.Add(SituationAccident.Carambolage);
                     lst.Add(SituationAccident.CollisionParcStationnementSansSignalisation);
+                    lst.Add(SituationAccident.Autre);
                     break;
                 default:
                     break;
@@ -351,6 +352,8 @@ namespace CooperatorsDirect.Models
         [Display(Name = "Carambolage")]
         Carambolage,
         [Display(Name = "Collision survenant dans un parc de stationnement sans signalisation")]
-        CollisionParcStationnementSansSignalisation
+        CollisionParcStationnementSansSignalisation,
+        [Display(Name = "Autre")]
+        Autre
     }
 }
