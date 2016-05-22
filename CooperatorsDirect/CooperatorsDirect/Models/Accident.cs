@@ -86,7 +86,7 @@ namespace CooperatorsDirect.Models
         public SituationAccident CirconstancesAccident { get; set; }
 
         [Display(Name = "Quel est la lettre de votre véhicule dans cette image?")]
-        public int NumeroVehicule { get; set; }
+        public string NumeroVehicule { get; set; }
 
         public Accident()
         {
@@ -151,7 +151,7 @@ namespace CooperatorsDirect.Models
 
         public double GetMyResponsability()
         {
-            return Accident.GetResponsabilities(CirconstancesAccident)[NumeroVehicule];
+            return Accident.GetResponsabilities(CirconstancesAccident, NumeroVehicule)[0];
         }
 
         public double[] GetResponsabilities()
@@ -272,7 +272,7 @@ namespace CooperatorsDirect.Models
             return new Bitmap(responseStream);
         }
 
-        public static double[] GetResponsabilities(SituationAccident sit)
+        public static double[] GetResponsabilities(SituationAccident sit, string numeroVehicule = "X")
         {
             throw new NotImplementedException("Retourne le pourcentage de responsabilité des membres, en ordre.");
             return new double[2]{ 1, 0 };

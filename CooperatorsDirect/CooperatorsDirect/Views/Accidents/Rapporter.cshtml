@@ -193,7 +193,7 @@
                 </div>
             </div>
 
-            <div id="NumeroVehicule" class="form-group simple-tooltip simple-tooltip-NumeroVehicule">
+            <div id="divNumeroVehicule" class="form-group simple-tooltip simple-tooltip-NumeroVehicule">
                 @Html.LabelFor(model => model.NumeroVehicule, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.NumeroVehicule, new { htmlAttributes = new { @class = "form-control", style = "max-width: 600px;" } })
@@ -203,7 +203,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="submit" value="Terminer" class="btn btn-default" />
                 </div>
             </div>
         </div>
@@ -213,10 +213,6 @@
 
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 <script type="text/javascript" src="~/Content/jquery.js"></script>
 <script type="text/javascript" src="~/Content/jquery.simpletip-1.3.1.js"></script>
@@ -251,7 +247,7 @@
         'Temoins': "Veulliez indiquer si vous avez fait appel aux policiers, ainsi que les noms de témoins",
         'InformationsAutreVoiture': "Les informations qui se trouve généralement sur la constat `l'amiable : Le nom et l'adresse du conducteur, le numéro de permis de conduire du conducteur, Le nom et l'adresse du propriétaire du véhicule inscrit au certificat d'immatriculation du véhicule, Le numéro de plaque d'immatriculation du véhicule, Les informations apparaissant à l'attestation d'assurance;",
         'DetailsSupplementaires': "Soyez le plus précis possible. Quelle était la situation, comment étaient positionner les véhicules, comment l'accident c'est-il produit",
-        'Details': "Pour tout autre information pertinante",
+        'Details': "Pour toute autre information pertinente",
         'NumeroVehicule':"Selon l'image, lequel entre X et Y représente votre véhicule?",
 
     
@@ -293,222 +289,279 @@
             hideEffect: 'slide',
             offset: [-250, 50]
         });
-        tooltips.find('.simple-tooltip-SituationVehicules').simpletip({
-            content: tooltipContents['SituationVehicules'],
-            position: 'top',
-            hideEffect: 'slide',
-            offset: [-250, 50]
-        });
-        tooltips.find('.simple-tooltip-CirconstancesAccident').simpletip({
-            content: tooltipContents['CirconstancesAccident'],
-            position: 'top',
-            hideEffect: 'slide',
-            offset: [-250, 50]
-        });
         tooltips.find('.simple-tooltip-RaisonDeplacement').simpletip({
             content: tooltipContents['RaisonDeplacement'],
             position: 'top',
             hideEffect: 'slide',
-            offset: [-250, 50]
+            offset: [250, 50]
         });
         tooltips.find('.simple-tooltip-Blessures').simpletip({
             content: tooltipContents['Blessures'],
             position: 'top',
             hideEffect: 'slide',
-            offset: [-250, 50]
+            offset: [250, 50]
         });
         tooltips.find('.simple-tooltip-Temoins').simpletip({
             content: tooltipContents['Temoins'],
             position: 'top',
             hideEffect: 'slide',
-            offset: [-250, 50]
+            offset: [250, 50]
         });
         tooltips.find('.simple-tooltip-InformationsAutreVoiture').simpletip({
             content: tooltipContents['InformationsAutreVoiture'],
             position: 'top',
             hideEffect: 'slide',
-            offset: [-250, 50]
+            offset: [250, 50]
         });
         tooltips.find('.simple-tooltip-DetailsSupplementaires').simpletip({
             content: tooltipContents['DetailsSupplementaires'],
             position: 'top',
             hideEffect: 'slide',
-            offset: [-250, 50]
+            offset: [250, 50]
         });
         tooltips.find('.simple-tooltip-Details').simpletip({
             content: tooltipContents['Details'],
             position: 'top',
             hideEffect: 'slide',
-            offset: [-250, 50]
+            offset: [250, 50]
         });
         tooltips.find('.simple-tooltip-NumeroVehicule').simpletip({
             content: tooltipContents['NumeroVehicule'],
             position: 'top',
             hideEffect: 'slide',
-            offset: [-250, 50]
+            offset: [250, 50]
         });
     }
 
     function ShowEtape(num)
     {
-        document.getElementById("IndicateurEtape").innerHTML = "Étape " + num;
         etape1.style.display = "none";
         etape2.style.display = "none";
         etape3.style.display = "none";
         etape4.style.display = "none";
+        var chkAccidentDeuxVehicules = document.getElementById("AuMoinsDeuxVehicules");
         if (num === 1) {
             curEtape = 1;
             etape1.style.display = "block";
             document.getElementById("btnPrevious").disabled = true;
+            document.getElementById("btnNext").disabled = false;
         }
         if (num === 2) {
-            curEtape = 2;
-            etape2.style.display = "block";
-            document.getElementById("btnPrevious").disabled = false;
+            if (chkAccidentDeuxVehicules.checked)
+            {
+                curEtape = 2;
+                etape2.style.display = "block";
+                document.getElementById("btnNext").disabled = false;
+                document.getElementById("btnPrevious").disabled = false;
+            }
+            else
+            {
+                num = 4;
+            }
         }
         if (num === 3) {
-            curEtape = 3;
-            etape3.style.display = "block";
-            document.getElementById("btnNext").disabled = false;
-            MakePage3(AddTooltip);
+            if (chkAccidentDeuxVehicules.checked) {
+                curEtape = 3;
+                etape3.style.display = "block";
+                document.getElementById("btnNext").disabled = false;
+                document.getElementById("btnPrevious").disabled = false;
+                MakePage3();
+            }
+            else {
+                curEtape = 1;
+                etape1.style.display = "block";
+                document.getElementById("btnPrevious").disabled = true;
+                document.getElementById("btnNext").disabled = false;
+            }
         }
         if (num === 4) {
             curEtape = 4;
             etape4.style.display = "block";
+            document.getElementById("btnPrevious").disabled = false;
             document.getElementById("btnNext").disabled = true;
+            document.getElementById("divNumeroVehicule").style = "display: none";
+            if (chkAccidentDeuxVehicules.checked) {
+                MakePage4();
+            }
         }
+        document.getElementById("IndicateurEtape").innerHTML = "Étape " + curEtape;
     }
 
-    function MakePage3(callback)
+    function MakePage3()
     {
         var dropdownSitVeh = document.getElementById("SituationVehicules");
         $.post("@Url.Action("ExportCirconstanceJson", "Accidents")", { sit: dropdownSitVeh.options[dropdownSitVeh.selectedIndex].value }, function (data) {
-        var divPage3 = document.getElementById("page3");
-        divPage3.innerHTML = "";
+            var divPage3 = document.getElementById("page3");
+            divPage3.innerHTML = "";
 
-        var divTable = document.createElement("div");
-        divTable.id = "tableCirconstances";
-        divTable.className = "table";
+            var divTable = document.createElement("div");
+            divTable.id = "tableCirconstances";
+            divTable.className = "table";
                 
-        var divRow;
-        var divRowPicture;
+            var divRow;
+            var divRowPicture;
 
-        var jsonData = JSON.parse(data);
+            var jsonData = JSON.parse(data);
 
-            //alert(jsonData);
-        var i = 0;
+                //alert(jsonData);
+            var i = 0;
 
-        for (var key in jsonData)
-        {
-            if (i % 2 == 0)
+            for (var key in jsonData)
             {
-                if (i != 0)
+                if (i % 2 == 0)
                 {
-                    divTable.appendChild(divRow);
-                    divTable.appendChild(divRowPicture);
+                    if (i != 0)
+                    {
+                        divTable.appendChild(divRow);
+                        divTable.appendChild(divRowPicture);
+                    }
+                    divRow = document.createElement("div");
+                    divRow.classList.add("form-group");
+                    divRow.classList.add("row");
+                    divRowPicture = document.createElement("div");
+                    divRowPicture.classList.add("form-group");
+                    divRowPicture.classList.add("row");
                 }
-                divRow = document.createElement("div");
-                divRow.classList.add("form-group");
-                divRow.classList.add("row");
-                divRowPicture = document.createElement("div");
-                divRowPicture.classList.add("form-group");
-                divRowPicture.classList.add("row");
-            }
-            var input = document.createElement("input");
-            if (i == 0)
-            {
-                input.setAttribute("checked", "checked");
-                input.setAttribute("data-val-required", "Le champ Circonstances de l'accident est requis.");
-            }
-            input.classList.add("col-xs-1");
-            input.classList.add("simple-tooltip");
-            input.classList.add("simple-tooltip-" + key);
-            input.id = "CirconstancesAccident";
-            input.name = "CirconstancesAccident";
-            input.value = key;
-            input.type = "radio";
-            divRow.appendChild(input);
+                var input = document.createElement("input");
+                if (i == 0)
+                {
+                    input.setAttribute("checked", "checked");
+                    input.setAttribute("data-val-required", "Le champ Circonstances de l'accident est requis.");
+                }
+                input.classList.add("col-xs-1");
+                input.classList.add("simple-tooltip");
+                input.classList.add("simple-tooltip-" + key);
+                input.id = "CirconstancesAccident";
+                input.name = "CirconstancesAccident";
+                input.value = key;
+                input.type = "radio";
+                divRow.appendChild(input);
 
-            var label = document.createElement("label");
-            label.classList.add("col-xs-4");
-            label.classList.add("simple-tooltip");
-            label.classList.add("simple-tooltip-" + key);
-            label.setAttribute("for", key);
-            label.innerText = jsonData[key][0];
-            divRow.appendChild(label);
+                var label = document.createElement("label");
+                label.classList.add("col-xs-4");
+                label.classList.add("simple-tooltip");
+                label.classList.add("simple-tooltip-" + key);
+                label.setAttribute("for", key);
+                label.innerText = jsonData[key][0];
+                divRow.appendChild(label);
 
-            if (jsonData[key].length > 1)
-            {
+                if (jsonData[key].length > 1)
+                {
                 
-                var img = document.createElement("img");
-                //<img src="smiley.gif" alt="Smiley face" height="42" width="42">
-                img.src = jsonData[key][1];
-                img.height = "150";
-                img.width = "200";
-                img.alt = "";
-                img.classList.add("col-xs-2");
-                img.classList.add("simple-tooltip");
-                img.classList.add("simple-tooltip-" + key);
-
-                divRowPicture.appendChild(img);
-                if (jsonData[key].length > 2) {
-                    var img2 = document.createElement("img");
+                    var img = document.createElement("img");
                     //<img src="smiley.gif" alt="Smiley face" height="42" width="42">
-                    img2.src = jsonData[key][2];
-                    img2.height = "150";
-                    img2.width = "200";
-                    img2.alt = "";
-                    img2.classList.add("col-xs-2");
-                    img2.classList.add("simple-tooltip");
-                    img2.classList.add("simple-tooltip-" + key);
+                    img.src = jsonData[key][1];
+                    img.height = "150";
+                    img.width = "200";
+                    img.alt = "";
+                    img.classList.add("simple-tooltip");
+                    img.classList.add("simple-tooltip-" + key);
 
-                    divRowPicture.appendChild(img2);
+                    if (jsonData[key][1].indexOf("Carambolage") == -1 && jsonData[key][1].indexOf("CollisionEnChaine") == -1 && jsonData[key][1].indexOf("PrioriteDePassage") == -1) {
+                        img.classList.add("col-xs-2");
+
+                        divRowPicture.appendChild(img);
+                        if (jsonData[key].length > 2) {
+                            var img2 = document.createElement("img");
+                            //<img src="smiley.gif" alt="Smiley face" height="42" width="42">
+                            img2.src = jsonData[key][2];
+                            img2.height = "150";
+                            img2.width = "200";
+                            img2.alt = "";
+                            img2.classList.add("col-xs-2");
+                            img2.classList.add("simple-tooltip");
+                            img2.classList.add("simple-tooltip-" + key);
+
+                            divRowPicture.appendChild(img2);
+                        }
+                        else {
+                            var divpad2 = document.createElement("div")
+                            divpad2.classList.add("col-xs-2");
+                            divpad2.classList.add("simple-tooltip");
+                            divpad2.classList.add("simple-tooltip-" + key);
+                            divRowPicture.appendChild(divpad2);
+                        }
+                        var divpad = document.createElement("div")
+                        divpad.classList.add("col-xs-1");
+                        divpad.classList.add("simple-tooltip");
+                        divpad.classList.add("simple-tooltip-" + key);
+                        divRowPicture.appendChild(divpad);
+                    }
+                    else
+                    {
+                        img.classList.add("col-xs-5");
+                        divRowPicture.appendChild(img);
+                    }
                 }
                 else
                 {
-                    var divpad2 = document.createElement("div")
-                    divpad2.classList.add("col-xs-2");
-                    divpad2.classList.add("simple-tooltip");
-                    divpad2.classList.add("simple-tooltip-" + key);
-                    divRowPicture.appendChild(divpad2);
+                    var img = document.createElement("div")
+                    img.classList.add("col-xs-5");
+                    img.classList.add("simple-tooltip");
+                    img.classList.add("simple-tooltip-" + key);
+                    divRowPicture.appendChild(img);
                 }
-                var divpad = document.createElement("div")
-                divpad.classList.add("col-xs-1");
-                divpad.classList.add("simple-tooltip");
-                divpad.classList.add("simple-tooltip-" + key);
-                divRowPicture.appendChild(divpad);
-            }
-            else
-            {
-                var img = document.createElement("div")
-                img.classList.add("col-xs-5");
-                img.classList.add("simple-tooltip");
-                img.classList.add("simple-tooltip-" + key);
-                divRowPicture.appendChild(img);
+
+                i++;
             }
 
-            i++;
-        }
-
-        divTable.appendChild(divRow);
-        divTable.appendChild(divRowPicture);
-        divPage3.appendChild(divTable);
-
-        //tooltips = $(master).find('.simple-tooltip');
-        //for (var key in jsonData) {
-        //    callback(key);
-        //}
-    });
+            divTable.appendChild(divRow);
+            divTable.appendChild(divRowPicture);
+            divPage3.appendChild(divTable);
+        });
     }
 
-    function AddTooltip(key)
+    function MakePage4()
     {
-        var found = tooltips.find('.simple-tooltip-' + key);
-        found.simpletip({
-            content: tooltipContents[key],
-            position: 'top',
-            hideEffect: 'slide',
-            offset: [-250, 50]
+        var circAccident = document.querySelector('input[name = "CirconstancesAccident"]:checked').value;
+        $.post("@Url.Action("ExportImagesJson", "Accidents")", { sit: circAccident }, function (data) {
+            
+            var divNoVehicule = document.getElementById("divNumeroVehicule");
+
+            var jsonData = JSON.parse(data);
+
+            if (jsonData.length > 0) {
+                divNoVehicule.style = "display:block";
+            }
+            else {
+                divNoVehicule.style = "display:none";
+            }
+            //<div id="divNumeroVehicule" class="form-group simple-tooltip simple-tooltip-NumeroVehicule">
+            //    <label class="control-label col-md-2" for="NumeroVehicule">Quel est la lettre de votre véhicule dans cette image?</label>
+            //    <div class="col-md-7">
+            //        <input class="form-control text-box single-line" data-val="true" data-val-number="The field Quel est la lettre de votre véhicule dans cette image? must be a number." data-val-required="Le champ Quel est la lettre de votre véhicule dans cette image? est requis." id="NumeroVehicule" name="NumeroVehicule" style="max-width: 600px;" type="number" value="0">
+            //        <span class="field-validation-valid text-danger" data-valmsg-for="NumeroVehicule" data-valmsg-replace="true"></span>
+            //    </div>
+            //<div class="tooltip fixed active" style="display: block; left: 324.5px; top: 1555px; opacity: 0;">Selon l'image, lequel entre X et Y représente votre véhicule?</div></div>
+            var divDivImg = document.getElementById("divImagesAccident");
+            if (divDivImg == null)
+            {
+                divDivImg = document.createElement("div");
+            }
+            divDivImg.innerHTML = "";
+            divDivImg.className = "col-md-12";
+            divDivImg.id = "divImagesAccident";
+            divDivImg.style.top = "10px";
+
+            for (var i = 0; i < jsonData.length; i++)
+            {
+                var src = jsonData[i];
+                var img = document.createElement("img");
+                img.src = src;
+                img.height = "150";
+                img.width = "200";
+                img.alt = "";
+                if (src.indexOf("Carambolage") == -1 && src.indexOf("CollisionEnChaine") == -1 && src.indexOf("PrioriteDePassage") == -1) {
+                    img.classList.add("col-md-3");
+                    divDivImg.appendChild(img);
+                }
+                else
+                {
+                    img.classList.add("col-md-6");
+                    divDivImg.appendChild(img);
+                }
+            }
+            divNoVehicule.appendChild(divDivImg);
         });
     }
 
