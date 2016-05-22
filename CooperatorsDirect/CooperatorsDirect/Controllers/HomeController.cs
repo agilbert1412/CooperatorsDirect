@@ -19,5 +19,12 @@ namespace CooperatorsDirect.Controllers
             return View();
             //Else go to connexion
         }
+
+        // GET: Contact
+        [CustomAuthorize(Roles.admin, Roles.reparateur, Roles.employe, Roles.client)]
+        public ActionResult Contact()
+        {
+            return View();
+        }
     }
 }

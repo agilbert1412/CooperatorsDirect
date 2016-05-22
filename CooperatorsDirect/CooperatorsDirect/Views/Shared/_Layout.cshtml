@@ -45,6 +45,7 @@
                         @if (SessionPersiter.User.Role == CooperatorsDirect.Models.Roles.employe)
                         {
                             <li>@Html.ActionLink("Clients", "List", "User")</li>
+                            <li>@Html.ActionLink("Rapports d'accidents", "Index", "Accidents")</li>
                         }
                         @if (SessionPersiter.User.Role == CooperatorsDirect.Models.Roles.client)
                         {
@@ -54,6 +55,7 @@
                     </ul>
                     string message = "Bonjour " + SessionPersiter.User.Prenom + "!";
                     <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Contactez-nous", "Contact", "Home")</li>
                         <li>@Html.ActionLink(message, "Details", "User")</li>
                         <li>@Html.ActionLink("Se déconnecter", "Logout", "User")</li>
                     </ul>

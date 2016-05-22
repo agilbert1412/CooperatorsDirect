@@ -12,8 +12,10 @@ namespace CooperatorsDirect.Models
         public string Nom { get; set; }
         public string Prenom { get; set; }
         public string Email { get; set; }
+        [Display(Name = "Numéro de police d'assurance")]
         public string NoPolice { get; set; }
         public string Password { get; set; }
+        [Display(Name = "Date de naissance")]
         public DateTime DateNaissance { get; set; }
         public string Adresse { get; set; }
         [Display(Name = "Roles")]
