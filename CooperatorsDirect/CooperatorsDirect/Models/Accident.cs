@@ -38,7 +38,7 @@ namespace CooperatorsDirect.Models
         public string RaisonDeplacement { get; set; }
 
         [Display(Name = "Blessures dans le véhicule (si oui, indiquer le nom et prénom du blessé, sa date de naissance, "
-            + " sa position dans le véhicule et si la ceinture de sécurité était porté")]
+            + " sa position dans le véhicule et si la ceinture de sécurité était portée)")]
         public string Blessures { get; set; }
 
         [Display(Name = "Témoins de l'accident et policiers impliqués")]
