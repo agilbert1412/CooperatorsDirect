@@ -140,12 +140,13 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.NumeroVehicule)
+            Id du rapport d'accident (À fournir au garagiste pour qu'il puisse communiquer plus facilement avec l'assureur)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.NumeroVehicule)
+                        @Html.DisplayFor(model => model.ID)
         </dd>
+
 
         @if (Model.Comments != null && Model.Comments.Count() > 0)
         {
