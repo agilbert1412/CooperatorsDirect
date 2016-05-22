@@ -7,7 +7,7 @@ using CooperatorsDirect.Security;
 
 namespace CooperatorsDirect.DAL
 {
-    public class CooperatorsInitializer : System.Data.Entity.DropCreateDatabaseAlways<CooperatorsContext>
+    public class CooperatorsInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<CooperatorsContext>
     {
         protected override void Seed(CooperatorsContext context)
         {
